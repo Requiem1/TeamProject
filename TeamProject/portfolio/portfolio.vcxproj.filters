@@ -46,6 +46,15 @@
     <Filter Include="Global">
       <UniqueIdentifier>{8996be60-5a58-4333-a8ce-b9b605e1c4b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{284074b5-8c30-4bf5-a8b9-786f67b36854}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Base">
+      <UniqueIdentifier>{8c525179-f526-4b52-98e4-c8bb33f503cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\IDisplayObect">
+      <UniqueIdentifier>{9862fab9-f0ad-4b24-a32c-613cbdf28d2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="targetver.h">
@@ -57,19 +66,10 @@
     <ClInclude Include="DeviceManager.h">
       <Filter>FrameWork</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalDefinition.h">
-      <Filter>FrameWork</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>FrameWork</Filter>
     </ClInclude>
     <ClInclude Include="portfolio.h">
-      <Filter>FrameWork</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
       <Filter>FrameWork</Filter>
     </ClInclude>
     <ClInclude Include="D3DUtility.h">
@@ -77,6 +77,21 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalDefinition.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Server.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseObject.h">
+      <Filter>Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="IDisplayObject.h">
+      <Filter>Object\IDisplayObect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -86,16 +101,7 @@
     <ClCompile Include="DeviceManager.cpp">
       <Filter>FrameWork</Filter>
     </ClCompile>
-    <ClCompile Include="GlobalDefinition.cpp">
-      <Filter>FrameWork</Filter>
-    </ClCompile>
     <ClCompile Include="portfolio.cpp">
-      <Filter>FrameWork</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseObject.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
       <Filter>FrameWork</Filter>
     </ClCompile>
     <ClCompile Include="D3DUtility.cpp">
@@ -103,6 +109,21 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalDefinition.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Server.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseObject.cpp">
+      <Filter>Object\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="IDisplayObject.cpp">
+      <Filter>Object\IDisplayObect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -156,8 +156,10 @@
     <ClInclude Include="D3DUtility.h" />
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="GlobalDefinition.h" />
+    <ClInclude Include="IDisplayObject.h" />
     <ClInclude Include="portfolio.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Server.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -168,7 +170,9 @@
     <ClCompile Include="D3DUtility.cpp" />
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="GlobalDefinition.cpp" />
+    <ClCompile Include="IDisplayObject.cpp" />
     <ClCompile Include="portfolio.cpp" />
+    <ClCompile Include="Server.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
