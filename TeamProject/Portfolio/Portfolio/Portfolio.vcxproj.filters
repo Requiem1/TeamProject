@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{89cdce51-e011-4098-9c59-a82ae1878255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effect">
+      <UniqueIdentifier>{bcbcb22d-da6e-4d37-a6a7-1e4350a1aef8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FrameWork">
+      <UniqueIdentifier>{a4a2afd8-711f-4bd8-8ba9-da8290d4385a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{bb403491-73c8-4f0e-a5d3-dc4ae25fcead}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{f8da85cc-3467-4ced-a3fb-d627415061d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{995d2b76-a83f-4021-8785-5599ee037514}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Music">
+      <UniqueIdentifier>{7a750d68-aa57-45aa-be48-22f0c77df067}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Server">
+      <UniqueIdentifier>{ea0720a6-7a63-4a6d-ad34-25d661851b49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{d66b96f1-1777-4772-9a46-8f96e6c00d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{4f0395ea-c8aa-414d-9cba-0f525f2133a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{d8dd8032-7071-4be6-9b92-699449252605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainSource">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>MainSource</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>MainSource</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\DeviceManager.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Application.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\GlobalDefinition.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Portfolio.h">
+      <Filter>FrameWork</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\PlayerManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\BaseObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\IDisplayObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Player.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIObject.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\IntroUIButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\D3DUtility.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Server.h">
+      <Filter>Server</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Manager\Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\DeviceManager.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Application.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\GlobalDefinition.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Portfolio.cpp">
+      <Filter>FrameWork</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\PlayerManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\IDisplayObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\BaseObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Player.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\IntroUIButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIObject.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\D3DUtility.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Server.cpp">
+      <Filter>Server</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Portfolio.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Portfolio.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
