@@ -157,6 +157,8 @@
     <ClInclude Include="DeviceManager.h" />
     <ClInclude Include="GlobalDefinition.h" />
     <ClInclude Include="IDisplayObject.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="portfolio.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Server.h" />
@@ -171,6 +173,8 @@
     <ClCompile Include="DeviceManager.cpp" />
     <ClCompile Include="GlobalDefinition.cpp" />
     <ClCompile Include="IDisplayObject.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="portfolio.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="stdafx.cpp">
