@@ -20,7 +20,9 @@ IntroUI::IntroUI()
 IntroUI::~IntroUI()
 {
 	SAFE_RELEASE(m_pSprite);
-	//m_pRootUI->ReleaseAll();
+	SAFE_RELEASE(m_pRootUI);
+	m_pRootUI->ReleaseAll();
+
 }
 
 void IntroUI::Init()
@@ -36,12 +38,13 @@ void IntroUI::Init()
 	m_pRootUI->AddChild(pButton);
 	pButton->SetPosition(&D3DXVECTOR3(135, 330, 0));
 	pButton->SetTexture("UI/resources/START_Off.png", "UI/resources/START_On.png", "UI/resources/START_Off.png");
-	
+
+
 	D3DXMATRIXA16 matS;
 	D3DXMatrixScaling(&matS, 0.7f, 0.7, 1);
 
 	D3DXMATRIXA16 matT;
-	D3DXMatrixTranslation(&matT, 0, 240, 0);
+	D3DXMatrixTranslation(&matT, -100, 240, 0);
 	m_matWorld = matS * matT;
 }
 

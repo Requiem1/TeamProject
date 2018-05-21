@@ -15,15 +15,18 @@ void Application::Init()
 {
 	g_pDeviceManager->Init();
 	g_pCamera->Init();
+	//g_pSceneManager->Init();
 }
 
 void Application::Destroy()
 {
+	//g_pSceneManager->Destroy();
 	g_pDeviceManager->Destroy();
 }
 
 void Application::Update()
 {
+	//g_pSceneManager->Update();
 	g_pCamera->Update();
 }
 
@@ -34,7 +37,7 @@ void Application::Render()
 
 	g_pDevice->BeginScene();
 
-	
+	//g_pSceneManager->Render();
 
 	g_pDevice->EndScene();
 	g_pDevice->Present(NULL, NULL, NULL, NULL);
@@ -42,5 +45,6 @@ void Application::Render()
 
 void Application::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	//g_pSceneManager->WndProc(hWnd, message, wParam, lParam);
 	g_pCamera->WndProc(hWnd, message, wParam, lParam);
 }

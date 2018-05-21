@@ -73,14 +73,14 @@ void IntroUIButton::Render()
 
 void IntroUIButton::SetTexture(string normal, string mouseOver, string selected)
 {
-	/*D3DXIMAGE_INFO info;
+	D3DXIMAGE_INFO info;
 	m_aTexture[MOUSE_OFF] = g_pTextureManager->GetTexture(normal);
 	m_aTexture[MOUSE_ON] = g_pTextureManager->GetTexture(mouseOver);
 	m_aTexture[MOUSE_CLICKED] = g_pTextureManager->GetTexture(selected);
 
 	D3DXGetImageInfoFromFileA(normal.c_str(), &info);
 	m_size.x = info.Width;
-	m_size.y = info.Height;*/
+	m_size.y = info.Height;
 }
 
 void IntroUIButton::SetText(LPD3DXFONT font, LPCTSTR text)

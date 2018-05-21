@@ -31,14 +31,31 @@ void MonsterCube::Init()
 	m_pVB->GetDesc(&m_VBDesc);
 	m_pIB->GetDesc(&m_IBDesc);
 
-	
+	m_pos = D3DXVECTOR3(GetRandomFloat(0, 3), 0, GetRandomFloat(0, 3));
+	m_Destination = D3DXVECTOR3(GetRandomFloat(-4, 4), 0, GetRandomFloat(-4, 4));
+
 
 	
 }
 
 void MonsterCube::Update()
 {
+	if (m_pos - m_Destination > D3DXVECTOR3(5,0,5))
+	{
+		m_pos.x +=(m_Destination.x - m_pos.x)/ 100;
+		m_pos.z += (m_Destination.z - m_pos.z) / 100;
+	}
+	else
+	{
+		m_Destination = D3DXVECTOR3(GetRandomFloat(-4, 4), 0, GetRandomFloat(-4, 4));
+	}
 
+	D3DXMATRIXA16 matS;
+	D3DXMatrixScaling(&matS, 0.3f, 0.3, 0.3);
+
+	D3DXMATRIXA16 matT;
+	D3DXMatrixTranslation(&matT, m_pos.x, m_pos.y, m_pos.z);
+	m_matWorld = matS * matT;
 }
 
 void MonsterCube::Render()

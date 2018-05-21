@@ -1,6 +1,7 @@
 #include "../stdafx.h"
 #include "IntroScene.h"
 #include "../UI/IntroUI.h"
+#include "../Mob/MonsterCube.h"
 
 
 IntroScene::IntroScene()
@@ -11,6 +12,10 @@ IntroScene::IntroScene()
 
 IntroScene::~IntroScene()
 {
+	for (auto p : m_pMonsterCubeList)
+	{
+		p->Release();
+	}
 	OnDestructIScene();
 }
 
@@ -18,6 +23,14 @@ void IntroScene::Init()
 {
 	IDisplayObject * pObj = new IntroUI; pObj->Init();
 	AddSimpleDisplayObj(pObj);
+	
+	for (size_t i = 0; i<50; i++)
+	{
+		MonsterCube * pMonsterCube = new MonsterCube;
+		pMonsterCube->Init();
+		m_pMonsterCubeList.push_back(pMonsterCube);
+	}
+	
 
 	D3DXVECTOR3 dir(1.0f, -1.0f, 1.0f);
 	D3DXVec3Normalize(&dir, &dir);
@@ -30,11 +43,19 @@ void IntroScene::Init()
 
 void IntroScene::Update()
 {
+	for (auto p : m_pMonsterCubeList)
+	{
+		p->Update();
+	}
 	OnUpdateIScene();
 }
 
 void IntroScene::Render()
 {
+	for (auto p : m_pMonsterCubeList)
+	{
+		p->Render();
+	}
 	OnRenderIScene();
 }
 
