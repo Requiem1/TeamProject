@@ -13,6 +13,7 @@ private:
 	D3DXMATRIXA16	m_matProj;
 	float			m_basePosY;
 	float			m_distance;
+	float           m_Fov;
 	float			m_rotX;
 	float			m_rotY;
 	bool			m_isLbuttonDown;
