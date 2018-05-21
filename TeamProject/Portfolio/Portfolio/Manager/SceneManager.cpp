@@ -15,7 +15,7 @@ void SceneManager::Init()
 {
 	m_vecScene.push_back(new IntroScene());
 
-	SetCurrentScene(SCENE_Intro);
+	SetCurrentScene(SCENE_INTRO);
 }
 
 void SceneManager::Destroy()
