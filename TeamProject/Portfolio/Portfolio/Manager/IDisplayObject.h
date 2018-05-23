@@ -9,6 +9,8 @@ protected:
 	IDisplayObject*			m_pParent;
 	vector<IDisplayObject*> m_vecPChild;
 
+	float					m_radius;
+
 public:
 	IDisplayObject();
 	virtual ~IDisplayObject();
@@ -23,5 +25,9 @@ public:
 	void			SetPosition(D3DXVECTOR3* pos) { m_pos = *pos; }
 	D3DXVECTOR3		GetRotation() { return m_rot; }
 	D3DXMATRIXA16	GetWorldMatrix() { return m_matWorld; }
+
+	// 충돌을 위한 radius 계산용 
+	float	GetRadius() { return m_radius; }
+	void	SetRadius(float f) { m_radius = f; }
 };
 

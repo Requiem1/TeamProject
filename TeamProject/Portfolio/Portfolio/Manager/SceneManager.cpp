@@ -9,6 +9,7 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
+
 }
 
 void SceneManager::Init()

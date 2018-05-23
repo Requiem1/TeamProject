@@ -1,11 +1,15 @@
 #pragma once
 #include "UIObject.h"
+
 class IntroUIButton;
+
 class UIButtonDelegate
 {
 public:
 	virtual void OnClick(IntroUIButton* pSender) = 0;
 };
+
+
 class IntroUIButton : public UIObject
 {
 private:

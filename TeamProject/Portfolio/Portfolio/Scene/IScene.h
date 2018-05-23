@@ -1,7 +1,6 @@
 #pragma once
 #include "../Manager/BaseObject.h"
-#include "../Manager\IDisplayObject.h"
-class IDisplayObject;
+#include "../Manager/IDisplayObject.h"
 
 class IScene : public BaseObject
 {

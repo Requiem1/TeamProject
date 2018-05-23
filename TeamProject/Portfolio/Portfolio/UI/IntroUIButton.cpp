@@ -2,8 +2,6 @@
 #include "IntroUIButton.h"
 
 
-
-
 IntroUIButton::IntroUIButton(UIButtonDelegate * pDelegate, LPD3DXSPRITE pSprite)
 	:UIObject(pSprite), m_pDelegate(pDelegate), m_buttonState(MOUSE_OFF)
 {

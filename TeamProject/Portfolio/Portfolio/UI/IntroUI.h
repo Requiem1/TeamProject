@@ -1,5 +1,5 @@
 #pragma once
-#include"../Manager\IDisplayObject.h"
+#include "../Manager/IDisplayObject.h"
 #include "IntroUIButton.h"
 
 class UIObject;

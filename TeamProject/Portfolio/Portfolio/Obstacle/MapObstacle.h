@@ -1,5 +1,5 @@
 #pragma once
-#include "IDisplayObject.h"
+#include "../Manager/IDisplayObject.h"
 
 class DrawingGroup;
 

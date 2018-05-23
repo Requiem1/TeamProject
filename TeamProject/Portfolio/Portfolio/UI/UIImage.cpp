@@ -2,13 +2,13 @@
 #include "UIImage.h"
 
 
-
 UIImage::UIImage(LPD3DXSPRITE pSprite, int uiTag) :UIObject(pSprite), m_pTex(NULL)
 {
 }
 
 UIImage::~UIImage()
 {
+	SAFE_RELEASE(m_pTex);
 }
 
 void UIImage::Render()

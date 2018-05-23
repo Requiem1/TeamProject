@@ -19,10 +19,9 @@ IntroUI::IntroUI()
 
 IntroUI::~IntroUI()
 {
+	m_pRootUI->ReleaseAll();
 	SAFE_RELEASE(m_pSprite);
 	SAFE_RELEASE(m_pRootUI);
-	m_pRootUI->ReleaseAll();
-
 }
 
 void IntroUI::Init()

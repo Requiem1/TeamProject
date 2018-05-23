@@ -9,6 +9,10 @@ TextureManager::TextureManager()
 
 TextureManager::~TextureManager()
 {
+	for (auto it : m_mapTexture)
+	{
+		SAFE_RELEASE(it.second);
+	}
 }
 
 LPDIRECT3DTEXTURE9 TextureManager::GetTexture(char * fullPath)

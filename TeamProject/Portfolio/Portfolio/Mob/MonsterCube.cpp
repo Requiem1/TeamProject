@@ -24,6 +24,10 @@ void MonsterCube::Init()
 	{
 		vecPos.push_back(g_aCubeVertex[i]);
 	}
+	
+	// 상자의 한 변은 2 * 2
+	// radius는 1.5 정도로 하자
+	m_radius = 1.5f;
 
 	SetVertex(m_vecVertex, m_vecIndex, vecPos);
 	SetBuffer(m_pVB, m_pIB, m_vecVertex, m_vecIndex);

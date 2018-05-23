@@ -1,5 +1,6 @@
 #pragma once
 #include "../Manager/IDisplayObject.h"
+
 class UIObject :public IDisplayObject
 {
 protected:

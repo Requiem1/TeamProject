@@ -8,6 +8,7 @@ UIObject::UIObject(LPD3DXSPRITE pSprite)
 
 UIObject::~UIObject()
 {
+
 }
 
 void UIObject::Init()

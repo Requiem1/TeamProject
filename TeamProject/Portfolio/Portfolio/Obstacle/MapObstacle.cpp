@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include "../stdafx.h"
 #include "MapObstacle.h"
 #include "DrawingGroup.h"
 #include "ObjLoader.h"

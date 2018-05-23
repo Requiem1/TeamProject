@@ -3,6 +3,7 @@
 
 
 class MonsterCube;
+class Grid;
 
 class IntroScene :public IScene
 {
@@ -11,6 +12,7 @@ public:
 	~IntroScene();
 
 	vector<MonsterCube*> m_pMonsterCubeList;
+	Grid* m_Grid;
 	//MonsterCube* m_pMonsterCube;
 
 	// IScene을(를) 통해 상속됨

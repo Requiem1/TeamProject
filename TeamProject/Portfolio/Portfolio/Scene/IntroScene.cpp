@@ -2,6 +2,7 @@
 #include "IntroScene.h"
 #include "../UI/IntroUI.h"
 #include "../Mob/MonsterCube.h"
+#include "../Manager/Grid.h"
 
 
 IntroScene::IntroScene()
@@ -14,15 +15,17 @@ IntroScene::~IntroScene()
 {
 	for (auto p : m_pMonsterCubeList)
 	{
-		p->Release();
+		SAFE_RELEASE(p);
 	}
+
+	SAFE_RELEASE(m_Grid);
 	OnDestructIScene();
 }
 
 void IntroScene::Init()
 {
-	IDisplayObject * pObj = new IntroUI; pObj->Init();
-	AddSimpleDisplayObj(pObj);
+	//IDisplayObject * pObj = new IntroUI; pObj->Init();
+	//AddSimpleDisplayObj(pObj);
 	
 	for (size_t i = 0; i<50; i++)
 	{

@@ -69,9 +69,9 @@ void Player::Init()
 	m_pVB->GetDesc(&m_VBDesc);
 	m_pIB->GetDesc(&m_IBDesc);
 	
-	g_pINPUTMGR->SetPosition(&m_DeltaPos, &m_DeltaRot, &m_IsJumping);
-	g_pINPUTMGR->CharacterMouseLButton(&m_LButtonDown);
-	g_pINPUTMGR->CharacterMouseRButton(&m_RButtonDown);
+	//g_pINPUTMGR->SetPosition(&m_DeltaPos, &m_DeltaRot, &m_IsJumping);
+	//g_pINPUTMGR->CharacterMouseLButton(&m_LButtonDown);
+	//g_pINPUTMGR->CharacterMouseRButton(&m_RButtonDown);
 	g_pCamera->SetTarget(&m_pos);
 	
 

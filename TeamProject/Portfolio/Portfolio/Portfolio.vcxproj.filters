@@ -42,6 +42,21 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{6df26bb0-4d91-4447-a0fa-07548bb60d0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Base">
+      <UniqueIdentifier>{97c6c015-e767-4857-9309-c5a17a91a93f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{e36566bd-6775-46bf-a84d-ddc08a2a3889}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Obstacle">
+      <UniqueIdentifier>{d8a761fd-fb8b-4a7d-b5fc-7919ecb86259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy">
+      <UniqueIdentifier>{0543ca56-73c9-4670-859c-77904b9a4f78}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -71,15 +86,6 @@
     <ClInclude Include="Manager\PlayerManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Manager\BaseObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Manager\IDisplayObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Player\Player.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="UI\UIObject.h">
       <Filter>UI</Filter>
     </ClInclude>
@@ -91,6 +97,51 @@
     </ClInclude>
     <ClInclude Include="Manager\Server.h">
       <Filter>Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Player.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\BaseObject.h">
+      <Filter>Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\IDisplayObject.h">
+      <Filter>Object\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Player\Inventory.h">
+      <Filter>Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\IScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\IntroScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\IntroUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIImage.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle\DrawingGroup.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Mob\MonsterCube.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Grid.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\DisplayObjManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\TextureManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\InputManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\SceneManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -115,15 +166,6 @@
     <ClCompile Include="Manager\PlayerManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Manager\IDisplayObject.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Manager\BaseObject.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Player\Player.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="UI\IntroUIButton.cpp">
       <Filter>UI</Filter>
     </ClCompile>
@@ -135,6 +177,48 @@
     </ClCompile>
     <ClCompile Include="Manager\Server.cpp">
       <Filter>Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Player.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\BaseObject.cpp">
+      <Filter>Object\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\IDisplayObject.cpp">
+      <Filter>Object\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Player\Inventory.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\IntroScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIImage.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\IntroUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle\DrawingGroup.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Mob\MonsterCube.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Grid.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\DisplayObjManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\TextureManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\InputManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\SceneManager.cpp">
+      <Filter>Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
