@@ -10,12 +10,16 @@ private:
 	D3DXVECTOR3 *Pos;
 	D3DXVECTOR3 *Rot;
 
-	bool IsJump;
+	bool *IsJump;
 
-	bool InputI;
-	bool InputF;
-	bool LButtonDown;
-	bool RButtonDown;
+	bool *InputI;
+	bool *InputF;
+
+	bool *UILButtonDown;
+	bool *UIRButtonDown;
+
+	bool *CharacterLButtonDown;
+	bool *CharacterRButtonDown;
 	
 
 
@@ -35,13 +39,18 @@ public:
 	void SetPosition(D3DXVECTOR3 *_Pos,D3DXVECTOR3 *_Rot,bool * isJump);
 
 	// 키보드 I키(L키 아님)입력 확인에 쓸 변수 설정
-	void SetKeyboardInputI(bool & _InputI);
+	void SetKeyboardInputI(bool * _InputI);
 	// 키보드 F키 입력 확인에 쓸 변수 설정
-	void SetKeyboardInputF(bool &_InputF);
-	// 마우스 좌클릭 확인용 변수 설정
-	void SetMouseLButton(bool & LButton);
-	// 마우스 우클릭 확인용 변수 설정
-	void SetMouseRButton(bool & RButton);
+	void SetKeyboardInputF(bool *_InputF);
+	// (UI클래스 전용) 마우스 좌클릭 확인용 변수 설정
+	void SetUIMouseLButton(bool * LButton);
+	// (UI클래스 전용) 마우스 우클릭 확인용 변수 설정
+	void SetUIMouseRButton(bool * RButton);
+
+	// 캐릭터 전용 마우스 좌클릭 확인용 변수 설정
+	void CharacterMouseLButton(bool * LButton);
+	// 캐릭터 전용 마우스 우클릭 확인용 변수 설정
+	void CharacterMouseRButton(bool * RButton);
 
 	/*
 	   마우스 입력 처리

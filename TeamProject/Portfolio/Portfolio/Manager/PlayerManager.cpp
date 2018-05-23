@@ -16,7 +16,6 @@ void PlayerManager::init()
 	Player * P;
 	P = new Player();
 	P->Init();
-	P->SetTag(CUREENTPLAYER);
 	m_vecPlayer.push_back(P);
 }
 

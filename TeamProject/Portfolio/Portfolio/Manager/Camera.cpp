@@ -3,7 +3,7 @@
 
 Camera::Camera()
 {
-	m_distance = 1.0f;
+	m_distance = 3.0f;
 	m_basePosY = 1.0f;
 
 	m_eye = D3DXVECTOR3(0, m_basePosY, -m_distance);
@@ -13,6 +13,7 @@ Camera::Camera()
 	m_rotY = 0.0f;
 	m_Fov  = 3.0f;
 	m_isLbuttonDown = false;
+	m_TestDistance = false;
 	m_pTarget = NULL;
 }
 
@@ -41,7 +42,7 @@ void Camera::Update()
 {
 	m_eye = D3DXVECTOR3(0, m_basePosY, -m_distance);
 
-	D3DXMATRIXA16 matRotX, matRotY, matRot;
+	
 	D3DXMatrixRotationX(&matRotX, m_rotX);
 	D3DXMatrixRotationY(&matRotY, m_rotY);
 	matRot = matRotX * matRotY;
@@ -59,7 +60,6 @@ void Camera::Update()
 
 	D3DXMatrixLookAtLH(&m_matView,
 		&m_eye, &m_lookAt, &m_up);
-
 
 	D3DXMatrixPerspectiveFovLH(&m_matProj,
 		D3DX_PI / m_Fov,
@@ -103,9 +103,15 @@ void Camera::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 
 		m_ptPrevMouse = currPoint;
-		
 	}
 	break;
+	case WM_MOUSEWHEEL:
+		if (m_TestDistance)
+		{
+			m_distance -= GET_WHEEL_DELTA_WPARAM(wParam) / 50.0f;
+			if (m_distance <= 10) m_distance = 10;
+			if (m_distance >= 30) m_distance = 30;
+		}
+		break;
 	}
 }
-

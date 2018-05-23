@@ -1,7 +1,6 @@
 #include "../stdafx.h"
 #include "Player.h"
 #include "Inventory.h"
-#include "../Manager/Grid.h"
 
 
 Player::Player() : m_INFO(PlAYERINFO(100, 100, 0, 0, 0))
@@ -29,14 +28,13 @@ Player::~Player()
 
 void Player::Init()
 {
+
 	m_EquipInfo = 0;
 	m_pos = D3DXVECTOR3(0, 1, 0);
 	m_pInventory = new Inventory();
 	m_pInventory->Init();
-
 	TestGrid = new Grid();
 	TestGrid->Init();
-
 	vector<D3DXVECTOR3> vecPos;
 	for (size_t i = 0; i < CUBE_VERTEX_SIZE; i++)
 	{
@@ -63,17 +61,14 @@ void Player::Init()
 	{
 		m_vecIndex.push_back(g_aCubeIndex[i]);
 	}
-
 	VertexBuffer(m_pVB, m_pIB, m_vecVertex, m_vecIndex);
 
 	m_pVB->GetDesc(&m_VBDesc);
 	m_pIB->GetDesc(&m_IBDesc);
 	
-	//g_pINPUTMGR->SetPosition(&m_DeltaPos, &m_DeltaRot, &m_IsJumping);
-	//g_pINPUTMGR->CharacterMouseLButton(&m_LButtonDown);
-	//g_pINPUTMGR->CharacterMouseRButton(&m_RButtonDown);
-	g_pCamera->SetTarget(&m_pos);
+	g_pINPUTMGR->SetPosition(&m_DeltaPos, &m_DeltaRot, &m_IsJumping);
 	
+	g_pCamera->SetTarget(&m_pos);
 
 }
 

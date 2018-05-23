@@ -3,14 +3,7 @@
 
 
 class Inventory;
-class Grid;
 // class º®
-enum Tag
-{
-	CUREENTPLAYER,
-	OTHERPLAYER
-};
-
 enum ITEMEQUIP
 {
 	HEAD = 1,
@@ -37,11 +30,8 @@ private:
 	vector<DWORD>           m_pIndexbuffer;
 	vector<VERTEX_PC>		m_vecVertex;
 	vector<WORD>			m_vecIndex;
-
 	Grid*                   TestGrid;
-	Tag                     m_Tag;
 	PlAYERINFO              m_INFO;
-
 	int                     m_EquipInfo;
 
 	D3DXVECTOR3		m_DeltaPos;
@@ -58,9 +48,6 @@ private:
 	float			m_gravity;
 	float			m_currGravity;
 
-	bool            m_LButtonDown;
-	bool            m_RButtonDown;
-
 	float			m_maxStepHeight;
 
 	Inventory *             m_pInventory;
@@ -73,7 +60,6 @@ private:
 	bool                    m_bHead;
 	bool                    m_bBody;
 	bool                    m_bReg;
-
 
 
 
@@ -107,10 +93,6 @@ public:
 	}
 	
 	void Equip();
-	void SetTag(Tag T)
-	{
-		m_Tag = T;
-	}
 
 	Inventory* GetInveontory()
 	{
