@@ -13,6 +13,8 @@ public:
 
 	vector<MonsterCube*> m_pMonsterCubeList;
 	Grid* m_Grid;
+	Player* m_Player;
+
 	//MonsterCube* m_pMonsterCube;
 
 	// IScene을(를) 통해 상속됨

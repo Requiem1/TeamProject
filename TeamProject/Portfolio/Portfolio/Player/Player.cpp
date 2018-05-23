@@ -23,7 +23,7 @@ Player::~Player()
 	SAFE_RELEASE(m_pVB);
 	SAFE_RELEASE(m_pIB);
 	SAFE_DELETE(m_pInventory);
-	SAFE_RELEASE(TestGrid);
+	//SAFE_RELEASE(TestGrid);
 }
 
 void Player::Init()
@@ -33,8 +33,8 @@ void Player::Init()
 	m_pos = D3DXVECTOR3(0, 1, 0);
 	m_pInventory = new Inventory();
 	m_pInventory->Init();
-	TestGrid = new Grid();
-	TestGrid->Init();
+	//TestGrid = new Grid();
+	//TestGrid->Init();
 	vector<D3DXVECTOR3> vecPos;
 	for (size_t i = 0; i < CUBE_VERTEX_SIZE; i++)
 	{
@@ -85,9 +85,11 @@ void Player::Update()
 		&D3DXVECTOR3(0, 0, 1), &matRotY);
 
 	D3DXVECTOR3 targetPos;
-	float basePosY = 0;
+
+	float	basePosY = 0;
 	bool	isIntersected = true;
 	float	height = 0;
+
 	if (m_IsJumping == true)
 	{
 		m_currMoveSpeedRate = 0.7f;
@@ -178,7 +180,7 @@ void Player::Update()
 
 void Player::Render()
 {
-	TestGrid->Render();
+	//TestGrid->Render();
 	g_pDevice->SetRenderState(D3DRS_LIGHTING, false);
 	g_pDevice->SetTransform(D3DTS_WORLD, &m_matWorld);
 	g_pDevice->SetFVF(VERTEX_PC::FVF);

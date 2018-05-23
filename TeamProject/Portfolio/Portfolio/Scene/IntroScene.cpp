@@ -26,8 +26,15 @@ void IntroScene::Init()
 {
 	//IDisplayObject * pObj = new IntroUI; pObj->Init();
 	//AddSimpleDisplayObj(pObj);
+	g_pCamera->SetTest(true);
 	
-	for (size_t i = 0; i<50; i++)
+	m_Grid = new Grid(); m_Grid->Init();
+	
+	m_Player = new Player(); m_Player->Init();
+	AddSimpleDisplayObj(m_Player);
+
+
+	for (size_t i = 0; i < 50; i++)
 	{
 		MonsterCube * pMonsterCube = new MonsterCube;
 		pMonsterCube->Init();
@@ -50,6 +57,7 @@ void IntroScene::Update()
 	{
 		p->Update();
 	}
+
 	OnUpdateIScene();
 }
 
@@ -59,6 +67,8 @@ void IntroScene::Render()
 	{
 		p->Render();
 	}
+
+	SAFE_RENDER(m_Grid);
 	OnRenderIScene();
 }
 

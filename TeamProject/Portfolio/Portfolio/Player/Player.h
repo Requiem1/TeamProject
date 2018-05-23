@@ -30,7 +30,7 @@ private:
 	vector<DWORD>           m_pIndexbuffer;
 	vector<VERTEX_PC>		m_vecVertex;
 	vector<WORD>			m_vecIndex;
-	Grid*                   TestGrid;
+	//Grid*                   TestGrid;
 	PlAYERINFO              m_INFO;
 	int                     m_EquipInfo;
 

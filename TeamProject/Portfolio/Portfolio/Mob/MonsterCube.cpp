@@ -54,12 +54,12 @@ void MonsterCube::Update()
 		m_Destination = D3DXVECTOR3(GetRandomFloat(-4, 4), 0, GetRandomFloat(-4, 4));
 	}
 
-	D3DXMATRIXA16 matS;
-	D3DXMatrixScaling(&matS, 0.3f, 0.3, 0.3);
+	//D3DXMATRIXA16 matS;
+	//D3DXMatrixScaling(&matS, 0.3f, 0.3, 0.3);
 
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_pos.x, m_pos.y, m_pos.z);
-	m_matWorld = matS * matT;
+	m_matWorld = matT;	//matS * matT;
 }
 
 void MonsterCube::Render()

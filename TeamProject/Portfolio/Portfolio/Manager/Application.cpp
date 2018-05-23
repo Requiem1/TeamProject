@@ -15,6 +15,9 @@ void Application::Init()
 {
 	g_pDeviceManager->Init();
 	g_pCamera->Init();
+
+	g_pINPUTMGR->Init();
+
 	g_SceneMgr->Init();
 }
 
@@ -28,6 +31,8 @@ void Application::Update()
 {
 	g_SceneMgr->Update();
 	g_pCamera->Update();
+
+	g_pINPUTMGR->Update();
 }
 
 void Application::Render()
