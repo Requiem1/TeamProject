@@ -50,7 +50,7 @@ public:
 	void RenderBoundingBox();
 
 	// 충돌 검사 함수!
-	D3DXVECTOR3 * CollideCheckFunc();
+	IDisplayObject * CollideCheckFunc();
 
 	CBox GetCBox() { return BoundingBox; }
 };

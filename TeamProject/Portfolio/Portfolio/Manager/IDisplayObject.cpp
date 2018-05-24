@@ -156,7 +156,7 @@ void IDisplayObject::RenderBoundingBox()
 	}
 }
 
-D3DXVECTOR3 * IDisplayObject::CollideCheckFunc()
+IDisplayObject * IDisplayObject::CollideCheckFunc()
 {
 	// 바운싱 박스 충돌 검사!
 	// BSP를 이용한 공간분할로 충돌체크를 해야되지만
@@ -174,7 +174,7 @@ D3DXVECTOR3 * IDisplayObject::CollideCheckFunc()
 		// 여러개를 한번에 충돌하는 방법을 고안해야한다
 		if (nRet == 1)
 		{
-			return &(p->GetPosition());
+			return p;
 		}
 	}
 
