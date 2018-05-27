@@ -1,5 +1,6 @@
 #include "../stdafx.h"
 #include "IntroUIButton.h"
+#include "../Map/HeightMap.h"
 
 
 IntroUIButton::IntroUIButton(UIButtonDelegate * pDelegate, LPD3DXSPRITE pSprite)
@@ -40,6 +41,7 @@ void IntroUIButton::Update()
 			{
 				if (m_pDelegate)
 					m_pDelegate->OnClick(this);
+				g_SceneMgr->SetCurrentScene(SCENE_HEIGHTMAP);
 			}
 			m_buttonState = MOUSE_ON;
 		}

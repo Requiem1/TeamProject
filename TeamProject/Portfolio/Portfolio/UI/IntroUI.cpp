@@ -3,12 +3,12 @@
 #include "UIObject.h"
 #include "UIImage.h"
 
-enum
-{
-	UITAG_TEXTVIEW,
-	UITAG_BUTTON1,
-	UITAG_BUTTON2
-};
+//enum
+//{
+//	UITAG_TEXTVIEW,
+//	UITAG_BUTTON1,
+//	UITAG_BUTTON2
+//};
 
 IntroUI::IntroUI()
 {

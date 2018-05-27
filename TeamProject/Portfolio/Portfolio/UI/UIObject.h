@@ -8,7 +8,7 @@ protected:
 public:
 	D3DXVECTOR3 m_combinedPos;
 	D3DXVECTOR3 m_pivot;
-	D3DXVECTOR3 m_size;
+	D3DXVECTOR2 m_size;
 	D3DCOLOR	m_color;
 
 	bool m_bDrawBorder; // 카메라 앞에 보일지 말지, 렌더에서 사용

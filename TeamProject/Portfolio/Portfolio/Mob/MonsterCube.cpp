@@ -1,12 +1,14 @@
 #include "../stdafx.h"
 #include "MonsterCube.h"
+#include "../Player/Player.h"
+#include "../Map/HeightMap.h"
 
-
-MonsterCube::MonsterCube()
+MonsterCube::MonsterCube():m_state(STATE_MOVE)
 {
 	D3DXMatrixIdentity(&m_matWorld);
 	m_pVB = NULL;
 	m_pIB = NULL;
+	m_moveSpeed = 00000.1f;
 } 
 
 
@@ -27,39 +29,58 @@ void MonsterCube::Init()
 	
 	// 상자의 한 변은 2 * 2
 	// radius는 1.5 정도로 하자
-	m_radius = 1.5f;
 
-	SetVertex(m_vecVertex, m_vecIndex, vecPos);
+	SetVertex(m_vecVertex, m_vecIndex, vecPos,white);
 	SetBuffer(m_pVB, m_pIB, m_vecVertex, m_vecIndex);
 
 	m_pVB->GetDesc(&m_VBDesc);
 	m_pIB->GetDesc(&m_IBDesc);
 
-	m_pos = D3DXVECTOR3(GetRandomFloat(0, 3), 0, GetRandomFloat(0, 3));
-	m_Destination = D3DXVECTOR3(GetRandomFloat(-4, 4), 0, GetRandomFloat(-4, 4));
 
+	m_pos = D3DXVECTOR3(GetRandomFloat(-30, 30), 1, GetRandomFloat(-30, 30));
+	m_pPlayer = g_pPlayerMGR->GetPlayer();
 
-	
 }
 
 void MonsterCube::Update()
 {
-	if (m_pos - m_Destination > D3DXVECTOR3(5,0,5))
-	{
-		m_pos.x +=(m_Destination.x - m_pos.x)/ 100;
-		m_pos.z += (m_Destination.z - m_pos.z) / 100;
-	}
-	else
-	{
-		m_Destination = D3DXVECTOR3(GetRandomFloat(-4, 4), 0, GetRandomFloat(-4, 4));
-	}
-
-	//D3DXMATRIXA16 matS;
-	//D3DXMatrixScaling(&matS, 0.3f, 0.3, 0.3);
-
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_pos.x, m_pos.y, m_pos.z);
 	m_matWorld = matT;	//matS * matT;
+	bool heightcheck;
+	m_Destination = m_pPlayer[0]->GetPosition();
+
+
+	switch (m_state)
+	{
+		case STATE_MOVE:
+		{
+			if (D3DXVec3Length(&(m_Destination - m_pos)) > 3.0f)
+			{
+				D3DXVec3Normalize(&m_Destination, (&(m_Destination - m_pos)));
+				m_pos.x += m_Destination.x *m_moveSpeed;
+				heightcheck = g_pCurrentMap->GetHeight(m_pos.y, m_pos);
+				m_pos.z += m_Destination.z * m_moveSpeed;
+			}
+			else
+			{
+				m_state = STATE_ATTACK;
+			}
+			break;
+		}
+		case STATE_ATTACK:
+		{
+			if (D3DXVec3Length(&(m_Destination - m_pos)) <= 3.0f)
+			{
+				heightcheck = g_pCurrentMap->GetHeight(m_pos.y, m_pos);
+			}
+			else
+			{
+				m_state = STATE_MOVE;
+			}
+		}
+		break;
+	}
 }
 
 void MonsterCube::Render()
@@ -74,22 +95,16 @@ void MonsterCube::Render()
 }
 
 
-void MonsterCube::SetVertex(vector<VERTEX_PC>& vecVertexOut, vector<WORD>& vecIndexOut, vector<D3DXVECTOR3> vecPos)
+void MonsterCube::SetVertex(vector<VERTEX_PC>& vecVertexOut, vector<WORD>& vecIndexOut, vector<D3DXVECTOR3> vecPos, D3DCOLOR color)
 {
-	D3DCOLOR red = D3DCOLOR_XRGB(255, 0, 0);
-	D3DCOLOR green = D3DCOLOR_XRGB(0, 255, 0);
-	D3DCOLOR blue = D3DCOLOR_XRGB(0, 0, 255);
-	D3DCOLOR white = D3DCOLOR_XRGB(255, 255, 255);
-	D3DCOLOR yellow = D3DCOLOR_XRGB(255, 255, 0);
-
-	vecVertexOut.push_back(VERTEX_PC(vecPos[0], white));
-	vecVertexOut.push_back(VERTEX_PC(vecPos[1], white));
-	vecVertexOut.push_back(VERTEX_PC(vecPos[2], white));
-	vecVertexOut.push_back(VERTEX_PC(vecPos[3], white));
-	vecVertexOut.push_back(VERTEX_PC(vecPos[4], white));
-	vecVertexOut.push_back(VERTEX_PC(vecPos[5], white));
-	vecVertexOut.push_back(VERTEX_PC(vecPos[6], white));
-	vecVertexOut.push_back(VERTEX_PC(vecPos[7], white));
+	vecVertexOut.push_back(VERTEX_PC(vecPos[0], color));
+	vecVertexOut.push_back(VERTEX_PC(vecPos[1], color));
+	vecVertexOut.push_back(VERTEX_PC(vecPos[2], color));
+	vecVertexOut.push_back(VERTEX_PC(vecPos[3], color));
+	vecVertexOut.push_back(VERTEX_PC(vecPos[4], color));
+	vecVertexOut.push_back(VERTEX_PC(vecPos[5], color));
+	vecVertexOut.push_back(VERTEX_PC(vecPos[6], color));
+	vecVertexOut.push_back(VERTEX_PC(vecPos[7], color));
 
 	for (size_t i = 0; i < CUBE_INDEX_SIZE; i++)
 	{
