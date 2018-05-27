@@ -7,6 +7,8 @@ class SkyBox;
 
 class MapObstacle;
 class CheckpointSwitch;
+class MonsterCube;
+
 
 class SceneHeightMap : public IScene
 {
@@ -16,7 +18,8 @@ private:
 	SkyBox * S_SkyBox;
 
 	vector<MapObstacle*> S_vecObstacle;
-	CheckpointSwitch* S_Switch;
+	CheckpointSwitch* S_Switch; 
+	vector<MonsterCube*> m_pMonsterCubeList;
 
 public:
 	SceneHeightMap();

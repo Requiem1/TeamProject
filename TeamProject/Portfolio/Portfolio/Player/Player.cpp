@@ -82,24 +82,42 @@ void Player::Update()
 
 	m_rot += m_DeltaRot * m_rotationSpeed;
 
-	D3DXMATRIXA16 matRotY;
-	matRotY = g_pCamera->GetCameraRotY();
-	D3DXVec3TransformNormal(&m_forward, &D3DXVECTOR3(0, 0, 1), &matRotY);
-	D3DXVECTOR3 Right,Left;
-	D3DXVec3Cross(&Right, &m_forward, &g_pCamera->GetCameraUp());
+
+	D3DXVECTOR3 Right, Left;
+	D3DXVECTOR3 Upvec = g_pCamera->GetCameraUp();
+	D3DXVec3Cross(&Right, &Upvec, &m_forward);
 	Left = D3DXVECTOR3(-Right.x, 0, -Right.z);
+
+
+	D3DXMATRIXA16 matRot;
+	matRot = g_pCamera->GetRot();
+	D3DXVec3TransformNormal(&m_forward, &D3DXVECTOR3(0, 0, 1), &matRot);
+
 
 	D3DXVECTOR3 targetPos;
 
-	float	basePosY = 0;
 	bool	isIntersected = true;
 	float	height = 0;
 
 	if (m_IsJumping == true)
 	{
 		m_currMoveSpeedRate = 0.7f;
-		targetPos = m_pos + m_forward * m_DeltaPos.z
-			* m_moveSpeed * m_currMoveSpeedRate;
+		if (m_DeltaRot.y == -1)
+		{
+			targetPos = m_pos + Left * 1.0f
+				* m_moveSpeed * m_currMoveSpeedRate;
+		}
+		else if (m_DeltaRot.y == 1)
+		{
+			targetPos = m_pos + Right * 1.0f
+				* m_moveSpeed * m_currMoveSpeedRate;
+		}
+		else
+		{
+
+			targetPos = m_pos + m_forward * m_DeltaPos.z
+				* m_moveSpeed * m_currMoveSpeedRate;
+		}
 
 		targetPos.y += m_jumpPower - m_currGravity;
 		m_currGravity += m_gravity;
@@ -110,12 +128,10 @@ void Player::Update()
 		}
 		if (isIntersected == false)
 		{
-			
 			if (g_pCurrentMap != NULL)
 			{
 				isIntersected = g_pCurrentMap->GetHeight(height, m_pos);
 			}
-			
 			m_pos.y = targetPos.y;
 		}
 		else
@@ -137,9 +153,24 @@ void Player::Update()
 	}
 	else //m_IsJumping == false
 	{
+		if (m_DeltaRot.y == -1)
+		{
+			targetPos = m_pos + Left * 1.0f
+				* m_moveSpeed * m_currMoveSpeedRate;
+
+		}
+		else if (m_DeltaRot.y == 1)
+		{
+			targetPos = m_pos + Right * 1.0f
+				* m_moveSpeed * m_currMoveSpeedRate;
+		}
+		else
+		{
+			targetPos = m_pos + m_forward * m_DeltaPos.z
+				* m_moveSpeed * m_currMoveSpeedRate;
+
+		}
 		
-		
-		targetPos = m_pos + m_forward * m_DeltaPos.z* m_moveSpeed * m_currMoveSpeedRate;
 		
 		
 		if (g_pCurrentMap != NULL)
@@ -181,7 +212,6 @@ void Player::Update()
 				m_vecBullet.push_back(item);
 
 			}
-
 		}
 		
 	}
@@ -201,7 +231,7 @@ void Player::Update()
 
 	D3DXMATRIXA16 matT;
 	D3DXMatrixTranslation(&matT, m_pos.x, m_pos.y, m_pos.z);
-	m_matWorld = matRotY * matT;
+	m_matWorld = matRot * matT;
 
 	if (D3DXVec3LengthSq(&m_DeltaRot) > D3DX_16F_EPSILON ||
 		D3DXVec3LengthSq(&m_DeltaPos) > D3DX_16F_EPSILON)
@@ -289,7 +319,4 @@ void Player::DiretcionDecide(OUT D3DXVECTOR3 * Direction)
 	Mat = XRot + YRot;
 
 	D3DXVec3TransformNormal(Direction, &Change, &Mat);
-
-
-
 }

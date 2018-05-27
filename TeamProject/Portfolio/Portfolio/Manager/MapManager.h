@@ -1,13 +1,14 @@
 #pragma once
 
 #define g_pMapManager MapManager::GetInstance()
+
 #define g_pCurrentMap MapManager::GetInstance()->GetCurrentMap()
 
 class IMap;
 
 class MapManager
 {
-	SINGLETON(MapManager);
+	SINGLETON(MapManager)
 private:
 	IMap* m_pCurrentMap;
 	map<string, IMap*> m_mapList;

@@ -18,6 +18,7 @@ void Application::Init()
 
 	g_pINPUTMGR->Init();
 
+	g_pPlayerMGR->init();
 	g_SceneMgr->Init();
 }
 
@@ -25,14 +26,15 @@ void Application::Destroy()
 {
 	g_SceneMgr->Destroy();
 	g_pDeviceManager->Destroy();
+	g_pPlayerMGR->Destory();
 }
 
 void Application::Update()
 {
-	g_SceneMgr->Update();
 	g_pCamera->Update();
-
 	g_pINPUTMGR->Update();
+	g_pPlayerMGR->Update();
+	g_SceneMgr->Update();
 }
 
 void Application::Render()
@@ -41,8 +43,8 @@ void Application::Render()
 		D3DCOLOR_XRGB(50, 50, 50), 1.0f, 0);
 
 	g_pDevice->BeginScene();
-
 	g_SceneMgr->Render();
+	g_pPlayerMGR->Render();
 
 	g_pDevice->EndScene();
 	g_pDevice->Present(NULL, NULL, NULL, NULL);

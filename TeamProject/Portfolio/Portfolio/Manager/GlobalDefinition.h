@@ -26,7 +26,8 @@ public:\
 #define METHOD_WNDPROC(method) void method(HWND hWnd,UINT message,WPARAM wParam,LPARAM lParam)
 
 enum SCENE_INDEX {
-	SCENE_INTRO
+	SCENE_INTRO,
+	SCENE_HEIGHTMAP
 };
 
 enum TAG_DISPLAYOBJECT

@@ -18,6 +18,10 @@ public:
 	{
 		m_vecPlayer.push_back(Player);
 	}
+	vector<Player*>  GetPlayer()
+	{
+		return m_vecPlayer;
+	}
 	void Destory();
 };
 

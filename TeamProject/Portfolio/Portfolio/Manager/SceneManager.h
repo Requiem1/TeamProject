@@ -3,6 +3,7 @@
 #define g_SceneMgr SceneManager::GetInstance()
 
 class IScene;
+class SceneHeightMap;
 
 class SceneManager
 {

@@ -39,6 +39,9 @@ void MonsterCube::Init()
 
 	m_pos = D3DXVECTOR3(GetRandomFloat(-30, 30), 1, GetRandomFloat(-30, 30));
 	m_pPlayer = g_pPlayerMGR->GetPlayer();
+	BoundingBox->initBoundingBox(NULL);
+	g_DisplayObjMgr->AddObjectWithTag(this, ENEMY_TAG);
+
 
 }
 
@@ -81,6 +84,8 @@ void MonsterCube::Update()
 		}
 		break;
 	}
+
+	BoundingBox->UpdateBoundingBox(m_matWorld, m_pos);
 }
 
 void MonsterCube::Render()
@@ -92,6 +97,8 @@ void MonsterCube::Render()
 	g_pDevice->SetIndices(m_pIB);
 	g_pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0,
 		m_VBDesc.Size, 0, m_IBDesc.Size / 3);
+
+	BoundingBox->RenderBoundingBox();
 }
 
 

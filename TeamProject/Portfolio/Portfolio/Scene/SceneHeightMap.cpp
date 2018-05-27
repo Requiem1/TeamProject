@@ -7,6 +7,8 @@
 #include "../Obstacle/MapObstacle.h"
 #include "../Obstacle/CheckpointSwitch.h"
 
+#include "../Mob/MonsterCube.h"
+
 SceneHeightMap::SceneHeightMap()
 {
 	S_HeightMap = NULL;
@@ -35,15 +37,18 @@ void SceneHeightMap::Init()
 	S_HeightMap->Load("Resource/Map/HeightMap.raw", &matS);
 	S_HeightMap->Init();
 
-	// 플레이어
-	S_Player = new Player();
-	S_Player->Init();
-	AddSimpleDisplayObj(S_Player);
 
 	// 스카이박스
 	S_SkyBox = new SkyBox();
 	S_SkyBox->Create("Resource/Skybox", "grimmnight");
-	AddSimpleDisplayObj(S_SkyBox);
+
+	for (size_t i = 0; i < 50; i++)
+	{
+		MonsterCube * pMonsterCube = new MonsterCube;
+		pMonsterCube->Init();
+		m_pMonsterCubeList.push_back(pMonsterCube);
+	}
+	//AddSimpleDisplayObj(S_SkyBox);
 
 	//lD3DXMATRIXA16 ObstaclePos;
 
@@ -57,7 +62,7 @@ void SceneHeightMap::Init()
 	//AddSimpleDisplayObj(S_Switch);
 
 	D3DMATERIAL9 mtl = DXUtil::WHITE_MTRL;
-	S_HeightMap->SetMtlTex(mtl, g_pTextureManager->GetTexture(L"Resource/Map/desert.jpg"));
+	S_HeightMap->SetMtlTex(mtl, g_pTextureManager->GetTexture("Resource/Map/desert.jpg"));
 
 	g_pMapManager->AddMap("HeightMap", S_HeightMap);
 	g_pMapManager->SetCurrentMap("HeightMap");
@@ -73,11 +78,21 @@ void SceneHeightMap::Init()
 
 void SceneHeightMap::Update()
 {
+	for (auto p : m_pMonsterCubeList)
+	{
+		p->Update();
+	}
+
 	OnUpdateIScene();
 }
 
 void SceneHeightMap::Render()
 {
+	for (auto p : m_pMonsterCubeList)
+	{
+		p->Render();
+	}
+	S_SkyBox->Render();
 	OnRenderIScene();
 }
 

@@ -27,6 +27,24 @@ void ITEM::Update()
 		m_matWorld = m_CSMat * m_CTransMat;
 	}
 	//UpdateBoundingBox();
+
+	BoundingBox->UpdateBoundingBox(m_matWorld, m_pos);
+	// 충돌체크!
+	IDisplayObject * CollideEnemy = g_DisplayObjMgr->CollideCheckWithTagFunc(this, 1, ENEMY_TAG);
+	if (CollideEnemy != NULL)
+	{
+		// 충돌 감지에서 제외시켜서 연산량을 줄인다
+		g_DisplayObjMgr->RemoveObject(CollideEnemy);
+		g_DisplayObjMgr->RemoveObjectWithTag(CollideEnemy, ENEMY_TAG);
+		g_DisplayObjMgr->RemoveObject(this);
+		g_DisplayObjMgr->RemoveObjectWithTag(this, BULLET_TAG);
+
+		// 안보이는 위치의 범위로 옮겨버린다
+		CollideEnemy->SetPosition(&D3DXVECTOR3(100000, 10000, 10000));
+		this->SetPosition(&D3DXVECTOR3(100000, 10000, 10000));
+	}
+
+
 }
 
 void ITEM::Render()
@@ -42,6 +60,7 @@ void ITEM::Render()
 			m_VBDesc.Size, 0, m_IBDesc.Size / 3);
 	}
 	//RenderBoundingBox();
+	BoundingBox->RenderBoundingBox();
 }
 
 void ITEM::SetBullet(D3DXVECTOR3 *m_pForward, D3DXVECTOR3 *m_ParantPos)
@@ -110,6 +129,8 @@ void ITEM::Init()
 
 	D3DXMatrixIdentity(&m_matWorld);
 	D3DXMatrixScaling(&m_CSMat, 0.2f, 0.2f, 0.2f);
+
+	g_DisplayObjMgr->AddObjectWithTag(this, BULLET_TAG);
 
 	//initBoundingBox(NULL);
 }

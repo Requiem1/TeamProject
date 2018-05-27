@@ -38,12 +38,12 @@ void InputManager::Update()
 	else
 		Pos->z = 0;
     
-	if (GetAsyncKeyState('A') & 0x8000)
-		Pos->y = -1;
-	else if (GetAsyncKeyState('D') & 0x8000)
-		Pos->y = 1;
+	if (GetKeyState('A') & 0x8000)
+		Rot->y = -1;
+	else if (GetKeyState('D') & 0x8000)
+		Rot->y = 1;
 	else
-		Pos->y = 0;
+		Rot->y = 0;
 
 	if (InputI != NULL && InputF != NULL)
 	{
@@ -59,11 +59,6 @@ void InputManager::Update()
 
 	}
 	
-
-	if (GetAsyncKeyState(VK_SPACE) & 0x8000)
-		*IsJump = true;
-	else
-		*IsJump = false;
 
 
 	memcpy(buttonOldStatus, buttonStatus, sizeof(buttonOldStatus));
@@ -89,6 +84,11 @@ void InputManager::Update()
 			buttonMap[i] = BUTTON_INPUT_STATUS_PRESS;
 		else
 			buttonMap[i] = BUTTON_INPUT_STATUS_NONE;
+	}
+
+	if (GetAsyncKeyState(VK_SPACE) & 0x0001)
+	{
+		(*IsJump) = true;
 	}
 
 

@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "../Scene/IScene.h"
 #include "../Scene/IntroScene.h"
+#include "../Scene/SceneHeightMap.h"
 SceneManager::SceneManager()
 {
 }
@@ -15,8 +16,9 @@ SceneManager::~SceneManager()
 void SceneManager::Init()
 {
 	m_vecScene.push_back(new IntroScene());
+	m_vecScene.push_back(new SceneHeightMap());
 
-	SetCurrentScene(SCENE_INTRO);
+	SetCurrentScene(SCENE_HEIGHTMAP);
 }
 
 void SceneManager::Destroy()

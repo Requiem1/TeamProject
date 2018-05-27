@@ -30,8 +30,11 @@ void IntroScene::Init()
 	
 	m_Grid = new Grid(); m_Grid->Init();
 	
+	/*
+	
 	m_Player = new Player(); m_Player->Init();
 	AddSimpleDisplayObj(m_Player);
+	*/
 
 
 	for (size_t i = 0; i < 50; i++)
