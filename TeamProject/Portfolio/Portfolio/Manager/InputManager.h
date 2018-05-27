@@ -2,6 +2,7 @@
 
 #define g_pINPUTMGR InputManager::GetInstance()
 
+#define MAX_INPUT_MOUSE 8
 
 class InputManager
 {
@@ -18,8 +19,19 @@ private:
 	bool *UILButtonDown;
 	bool *UIRButtonDown;
 
-	bool *CharacterLButtonDown;
-	bool *CharacterRButtonDown;
+
+	byte buttonStatus[MAX_INPUT_MOUSE];
+	byte buttonOldStatus[MAX_INPUT_MOUSE];
+	byte buttonMap[MAX_INPUT_MOUSE];
+
+	enum INPUT_STATUS
+	{
+		BUTTON_INPUT_STATUS_NONE = 0,
+		BUTTON_INPUT_STATUS_DOWN,
+		BUTTON_INPUT_STATUS_UP,
+		BUTTON_INPUT_STATUS_PRESS,
+		BUTTON_INPUT_STATUS_DBLCLK
+	};
 	
 
 
@@ -42,22 +54,20 @@ public:
 	void SetKeyboardInputI(bool * _InputI);
 	// 키보드 F키 입력 확인에 쓸 변수 설정
 	void SetKeyboardInputF(bool *_InputF);
-	// (UI클래스 전용) 마우스 좌클릭 확인용 변수 설정
-	void SetUIMouseLButton(bool * LButton);
-	// (UI클래스 전용) 마우스 우클릭 확인용 변수 설정
-	void SetUIMouseRButton(bool * RButton);
 
-	// 캐릭터 전용 마우스 좌클릭 확인용 변수 설정
-	void CharacterMouseLButton(bool * LButton);
-	// 캐릭터 전용 마우스 우클릭 확인용 변수 설정
-	void CharacterMouseRButton(bool * RButton);
 
-	/*
-	   마우스 입력 처리
-	   각 마우스 DOWN메세지 입력시에 맞는 변수 true 설정
-	   마우스 UP메세지가 발생하면 false
-	*/
-	void WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
+
+	bool ButtonDown(DWORD button) { return buttonMap[button] == BUTTON_INPUT_STATUS_DOWN; }
+	bool ButtonUp(DWORD button) { return buttonMap[button] == BUTTON_INPUT_STATUS_UP; }
+	bool ButtonPress(DWORD button) { return buttonMap[button] == BUTTON_INPUT_STATUS_PRESS; }
+	bool ButtonDB(DWORD button) { return buttonMap[button] == BUTTON_INPUT_STATUS_DBLCLK; }
+
+	enum INPUT_TYPE
+	{
+		LBUTTON,
+		RBUTTON,
+		MBUTTON
+	};
 
 
 };

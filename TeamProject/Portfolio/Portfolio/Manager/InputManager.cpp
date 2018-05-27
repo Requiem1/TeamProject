@@ -21,8 +21,11 @@ void InputManager::Init()
 	UILButtonDown = NULL;
 	UIRButtonDown = NULL;
 
-	CharacterLButtonDown = NULL;
-	CharacterRButtonDown = NULL;
+
+	ZeroMemory(buttonStatus, sizeof(byte) * MAX_INPUT_MOUSE);
+	ZeroMemory(buttonOldStatus, sizeof(byte) * MAX_INPUT_MOUSE);
+	ZeroMemory(buttonMap, sizeof(byte) * MAX_INPUT_MOUSE);
+
 
 }
 
@@ -36,11 +39,11 @@ void InputManager::Update()
 		Pos->z = 0;
     
 	if (GetAsyncKeyState('A') & 0x8000)
-		Rot->y = -1;
+		Pos->y = -1;
 	else if (GetAsyncKeyState('D') & 0x8000)
-		Rot->y = 1;
+		Pos->y = 1;
 	else
-		Rot->y = 0;
+		Pos->y = 0;
 
 	if (InputI != NULL && InputF != NULL)
 	{
@@ -63,6 +66,32 @@ void InputManager::Update()
 		*IsJump = false;
 
 
+	memcpy(buttonOldStatus, buttonStatus, sizeof(buttonOldStatus));
+
+	ZeroMemory(buttonStatus, sizeof(buttonStatus));
+	ZeroMemory(buttonMap, sizeof(buttonMap));
+
+	buttonStatus[INPUT_TYPE::LBUTTON] = GetAsyncKeyState(VK_LBUTTON) & 0x8000 ? 1 : 0;
+	buttonStatus[INPUT_TYPE::RBUTTON] = GetAsyncKeyState(VK_RBUTTON) & 0x8000 ? 1 : 0;
+	buttonStatus[INPUT_TYPE::MBUTTON] = GetAsyncKeyState(VK_MBUTTON) & 0x8000 ? 1 : 0;
+
+
+	for (DWORD i = 0; i < MAX_INPUT_MOUSE; i++)
+	{
+		int oldStatus = buttonOldStatus[i];
+		int currentStatus = buttonStatus[i];
+
+		if (oldStatus == 0 && currentStatus == 1)
+			buttonMap[i] = BUTTON_INPUT_STATUS_DOWN;
+		else if (oldStatus == 1 && currentStatus == 0)
+			buttonMap[i] = BUTTON_INPUT_STATUS_UP;
+		else if (oldStatus == 1 && currentStatus == 1)
+			buttonMap[i] = BUTTON_INPUT_STATUS_PRESS;
+		else
+			buttonMap[i] = BUTTON_INPUT_STATUS_NONE;
+	}
+
+
 }
 
 void InputManager::SetPosition(D3DXVECTOR3 *_Pos, D3DXVECTOR3 *_Rot, bool * isJump)
@@ -80,47 +109,4 @@ void InputManager::SetKeyboardInputI(bool * _InputI)
 void InputManager::SetKeyboardInputF(bool *_InputF)
 {
 	InputF = _InputF;
-}
-
-void InputManager::SetUIMouseLButton(bool * LButton)
-{
-	UILButtonDown = LButton;
-}
-
-void InputManager::SetUIMouseRButton(bool * RButton)
-{
-	UIRButtonDown = RButton;
-}
-
-void InputManager::CharacterMouseLButton(bool * LButton)
-{
-	CharacterLButtonDown = LButton;
-}
-
-void InputManager::CharacterMouseRButton(bool * RButton)
-{
-	CharacterRButtonDown = RButton;
-}
-
-void InputManager::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-	switch (message)
-	{
-	case WM_LBUTTONDOWN:
-		//*UILButtonDown = true;
-		*CharacterLButtonDown = true;
-		break;
-	case WM_LBUTTONUP:
-		//*UILButtonDown = false;
-		*CharacterLButtonDown = false;
-		break;
-	case WM_RBUTTONDOWN:
-		//*UIRButtonDown = true;
-		*CharacterRButtonDown = true;
-		break;
-	case WM_RBUTTONUP:
-		//*UIRButtonDown = false;
-		*CharacterRButtonDown = false;
-		break;
-	}
 }

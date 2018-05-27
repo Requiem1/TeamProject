@@ -47,5 +47,13 @@ public:
 	{
 		return matRot;
 	}
+	D3DXMATRIXA16 GetCameraRotY()
+	{
+		return matRotY;
+	}
+	D3DXVECTOR3 GetCameraUp()
+	{
+		return m_up;
+	}
 };
 
