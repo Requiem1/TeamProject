@@ -3,12 +3,20 @@
 
 class HeightMap;
 class Player;
+class SkyBox;
+
+class MapObstacle;
+class CheckpointSwitch;
 
 class SceneHeightMap : public IScene
 {
 private:
 	HeightMap * S_HeightMap;
 	Player * S_Player;
+	SkyBox * S_SkyBox;
+
+	vector<MapObstacle*> S_vecObstacle;
+	CheckpointSwitch* S_Switch;
 
 public:
 	SceneHeightMap();

@@ -4,6 +4,118 @@
 #include "../stdafx.h"
 #include "CollisionDetection.hpp"
 
+void CBox::MakeBoundingBox(CBox * pBox, const D3DXVECTOR3 & vecMin, const D3DXVECTOR3 & vecMax)
+{
+	// Boundingbox를 렌더하기 위한 선을 만든다
+	vector<VERTEX_PC> temp;
+	D3DCOLOR green = D3DCOLOR_XRGB(0, 255, 0);
+
+	temp.push_back(VERTEX_PC(D3DXVECTOR3(vecMin.x, vecMin.y, vecMin.z), green)); //Min
+	temp.push_back(VERTEX_PC(D3DXVECTOR3(vecMin.x, vecMax.y, vecMin.z), green));
+	temp.push_back(VERTEX_PC(D3DXVECTOR3(vecMax.x, vecMax.y, vecMin.z), green));
+	temp.push_back(VERTEX_PC(D3DXVECTOR3(vecMax.x, vecMin.y, vecMin.z), green));
+
+	temp.push_back(VERTEX_PC(D3DXVECTOR3(vecMin.x, vecMin.y, vecMax.z), green));
+	temp.push_back(VERTEX_PC(D3DXVECTOR3(vecMin.x, vecMax.y, vecMax.z), green));
+	temp.push_back(VERTEX_PC(D3DXVECTOR3(vecMax.x, vecMax.y, vecMax.z), green)); //Max
+	temp.push_back(VERTEX_PC(D3DXVECTOR3(vecMax.x, vecMin.y, vecMax.z), green));
+
+	for (size_t i = 0; i < CUBE_INDEX_SIZE; i++)
+	{
+		pBox->vecBoxVertex.push_back(temp[g_aCubeIndex[i]]);
+	}
+
+
+	// BoundingBox의 연산용 변수들의 값을 넣는다
+	pBox->center[0] = (vecMin.x + vecMax.x) / 2.0F;
+	pBox->center[1] = (vecMin.y + vecMax.y) / 2.0F;
+	pBox->center[2] = (vecMin.z + vecMax.z) / 2.0F;
+
+	pBox->extent[0] = vecMax.x - pBox->center[0];
+	pBox->extent[1] = vecMax.y - pBox->center[1];
+	pBox->extent[2] = vecMax.z - pBox->center[2];
+
+	// identity world coordinate axis
+	pBox->axis[0][0] = 1.0F;
+	pBox->axis[0][1] = 0.0F;
+	pBox->axis[0][2] = 0.0F;
+
+	pBox->axis[1][0] = 0.0F;
+	pBox->axis[1][1] = 1.0F;
+	pBox->axis[1][2] = 0.0F;
+
+	pBox->axis[2][0] = 0.0F;
+	pBox->axis[2][1] = 0.0F;
+	pBox->axis[2][2] = 1.0F;
+
+	pBox->translation[0] = 0.0F;
+	pBox->translation[1] = 0.0F;
+	pBox->translation[2] = 0.0F;
+}
+
+
+void CBox::initBoundingBox(ID3DXMesh * ObjectMesh)
+{
+	D3DXVECTOR3 vecMin, vecMax, vecMinWorld, vecMaxWorld;
+	VOID *ptr = NULL;
+
+	if (ObjectMesh != NULL)
+	{
+		// dwVertexNum = Mesh변수->GetNumVertices()
+		// dwFvfSize = Mesh변수->GetFVF() -- 다만 이건 VERTEX_PNT:FVF를 해야될듯함
+		DWORD dwVertexNum = ObjectMesh->GetNumVertices();
+		DWORD dwFvfSize = D3DXGetFVFVertexSize(ObjectMesh->GetFVF());
+
+		// BoundingBox 제작
+		ObjectMesh->LockVertexBuffer(0, &ptr);
+		D3DXComputeBoundingBox((D3DXVECTOR3 *)ptr, dwVertexNum, dwFvfSize, &vecMin, &vecMax);
+		ObjectMesh->UnlockVertexBuffer();
+	}
+	else
+	{
+		// 메쉬 없이 큐브만 있을 경우 -> 큐브의 Min과 Max값을 넣는다
+		vecMin = g_aCubeVertex[0];
+		vecMax = g_aCubeVertex[6];
+	}
+
+	MakeBoundingBox(this, vecMin, vecMax);
+}
+
+void CBox::UpdateBoundingBox(D3DXMATRIXA16 &matWorld, D3DXVECTOR3 &pos)
+{
+	D3DXMATRIX matBox;
+
+	// 박스의 transform을 가져온다.
+	GetBoxTransform(&matBox, this);
+
+	// 박스의 transform을 바꾼다.
+	matBox *= matWorld;
+	SetBoxTransform(&matBox, this);
+
+	// 박스의 center 좌표도 바꾼다.
+	center[0] = pos.x;
+	center[1] = pos.y;
+	center[2] = pos.z;
+
+	if (GetAsyncKeyState('0') & 0x0001)
+	{
+		g_DisplayObjMgr->SetBoundingBoxRender();
+	}
+}
+
+void CBox::RenderBoundingBox()
+{
+	// 0 키를 누르면 BoundingBox가 Render된다
+	if (g_DisplayObjMgr->GetBoundingBoxRender() == true)
+	{
+		g_pDevice->SetTexture(0, NULL);
+		//g_pDevice->SetFVF(VERTEX_PC::FVF);
+		g_pDevice->DrawPrimitiveUP(D3DPT_LINESTRIP, vecBoxVertex.size() - 1,
+			&vecBoxVertex[0], sizeof(VERTEX_PC));
+	}
+}
+
+
 int BoxBoxIntersectionTest(const CBox &box0, const CBox &box1)
 {
     // compute difference of box centers

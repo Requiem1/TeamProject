@@ -6,6 +6,9 @@ HeightMap::HeightMap()
 {
 	m_pMesh = NULL;
 	m_pMtlTex = NULL;
+
+	// 맵이므로 오브젝트에서 뺀다
+	g_DisplayObjMgr->RemoveObject(this);
 }
 
 

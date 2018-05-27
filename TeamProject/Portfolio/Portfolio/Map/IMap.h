@@ -2,7 +2,7 @@
 #include "../stdafx.h"
 #include "../Manager/IDisplayObject.h"
 
-class AStar;
+//class AStar;
 
 class IMap : public IDisplayObject
 {
@@ -14,9 +14,9 @@ protected:
 	D3DXVECTOR3			m_size;
 	D3DXVECTOR3			m_scale;
 
-	AStar*				m_pAstar;
+	//AStar*				m_pAstar;
 
-	IMap() {m_pAstar = NULL; }
+	IMap() {}	//{m_pAstar = NULL; }
 	
 public:
 	virtual ~IMap() {}
@@ -34,5 +34,5 @@ public:
 
 	const D3DXVECTOR3& GetSize() { return m_size; }
 
-	AStar* GetAstar() { return m_pAstar; }
+	//AStar* GetAstar() { return m_pAstar; }
 };

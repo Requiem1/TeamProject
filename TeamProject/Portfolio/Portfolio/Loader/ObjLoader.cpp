@@ -1,6 +1,6 @@
 #include "../stdafx.h"
-#include "ObjLoader.h"
-#include "DrawingGroup.h"
+#include "../Loader/ObjLoader.h"
+#include "../Obstacle/DrawingGroup.h"
 
 ObjLoader::ObjLoader()
 {
@@ -233,34 +233,7 @@ LPD3DXMESH ObjLoader::LoadMesh(const char* filePath, const char* fileName, D3DXM
 		}
 		else if (CompareStr(szToken, "f"))
 		{
-			//int aIndex[3][3];
-			//fin.getline(szToken, 128);
-
-			//sscanf_s(szToken, "%d/%d/%d %d/%d/%d %d/%d/%d",
-			//	&aIndex[0][0], &aIndex[0][1], &aIndex[0][2],
-			//	&aIndex[1][0], &aIndex[1][1], &aIndex[1][2],
-			//	&aIndex[2][0], &aIndex[2][1], &aIndex[2][2]);
-
-			//for (int i = 0; i < 3; i++)
-			//{
-			//	VERTEX_PNT pnt;
-			//	pnt.p = vecP[aIndex[i][0] - 1];
-			//	pnt.t = vecT[aIndex[i][1] - 1];
-			//	pnt.n = vecN[aIndex[i][2] - 1];
-
-			//	if (pMat)
-			//	{
-			//		D3DXVec3TransformCoord(&pnt.p, &pnt.p, pMat);
-			//		D3DXVec3TransformNormal(&pnt.n, &pnt.n, pMat);
-			//	}
-
-			//	// vertex 3개를 넣음 -> 면이 생김!
-			//	// 애트리뷰트 버퍼에 그 삼각형에 해당하는 id를 넣어준다
-			//	vecPNT.push_back(pnt);
-			//}
-
-			//vecAttBuf.push_back(m_mapMtlTex[mtlName]->id); //면하나에 속성 id 하나
-
+			// 3개 또는 4개의 정점을 받는 인덱스
 			int aIndex[4][3];
 			fin.getline(szToken, 128);
 
@@ -277,7 +250,7 @@ LPD3DXMESH ObjLoader::LoadMesh(const char* filePath, const char* fileName, D3DXM
 				ptr = strtok_s(NULL, " ", &context);
 			}
 
-
+			// 정점 3개를 받음
 			if (idxNum == 3)
 			{
 				for (int i = 0; i < 3; i++)
@@ -297,7 +270,7 @@ LPD3DXMESH ObjLoader::LoadMesh(const char* filePath, const char* fileName, D3DXM
 
 				vecAttBuf.push_back(m_mapMtlTex[mtlName]->id); //면하나에 속성 id 하나
 			}
-			// 값이 4개
+			// 정점 4개를 받음
 			else if (idxNum == 4)
 			{
 				// 0 1 2
@@ -319,7 +292,7 @@ LPD3DXMESH ObjLoader::LoadMesh(const char* filePath, const char* fileName, D3DXM
 				vecAttBuf.push_back(m_mapMtlTex[mtlName]->id); //면하나에 속성 id 하나
 
 
-				// 0 2 3?
+				// 0 2 3
 				VERTEX_PNT pnt0;
 				pnt0.p = vecP[aIndex[0][0] - 1];
 				pnt0.t = vecT[aIndex[0][1] - 1];
@@ -361,9 +334,9 @@ LPD3DXMESH ObjLoader::LoadMesh(const char* filePath, const char* fileName, D3DXM
 	LPD3DXMESH pMesh = NULL;
 
 	// 면수, 버택스 수, 나머지는 다른것들과 같음!
-	// WORD의 최대 크기가 65534(16비트)이므로 넘어가면 32비트로 변환해줌
-	if(vecPNT.size() >= 65534)
-		D3DXCreateMeshFVF(vecPNT.size() / 3, vecPNT.size(), D3DXMESH_MANAGED |D3DXMESH_32BIT, VERTEX_PNT::FVF, g_pDevice, &pMesh);
+	// WORD의 최대 크기가 65536(16비트)이므로 넘어가면 32비트로 변환해줌
+	if(vecPNT.size() >= 65536)
+		D3DXCreateMeshFVF(vecPNT.size() / 3, vecPNT.size(), D3DXMESH_MANAGED | D3DXMESH_32BIT, VERTEX_PNT::FVF, g_pDevice, &pMesh);
 	else
 		D3DXCreateMeshFVF(vecPNT.size() / 3, vecPNT.size(), D3DXMESH_MANAGED, VERTEX_PNT::FVF, g_pDevice, &pMesh);
 

@@ -1,6 +1,7 @@
 #pragma once
 // Created by zoi@3map.snu.ac.kr
 // for SNU CG DirectX lecture
+// 출저 : http://www.gingaminga.com/Data/Note/oriented_bounding_boxes/
 
 class CBox
 {
@@ -34,6 +35,14 @@ public:
         t[14] = translation[2]; // _43
         t[15] = ((float)1.0);   // _44
     }
+
+	// OBB 바운싱 박스 초기화 & 제작
+	void initBoundingBox(ID3DXMesh * ObjectMesh);
+	void MakeBoundingBox(CBox *pBox, const D3DXVECTOR3 &vecMin, const D3DXVECTOR3 &vecMax);
+
+	// 바운싱박스의 update/render 함수
+	void UpdateBoundingBox(D3DXMATRIXA16 &matWorld, D3DXVECTOR3 &pos);
+	void RenderBoundingBox();
 };
 
 int BoxBoxIntersectionTest(const CBox &box0, const CBox &box1);

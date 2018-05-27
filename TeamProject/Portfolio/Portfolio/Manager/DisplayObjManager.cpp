@@ -4,6 +4,7 @@
 
 DisplayObjManager::DisplayObjManager()
 {
+	isBoundingBoxRender = false;
 }
 
 
@@ -37,4 +38,121 @@ void DisplayObjManager::RemoveObjectWithTag(IDisplayObject * Obj, WORD tag)
 void DisplayObjManager::Destroy()
 {
 	m_AllObstacleList.clear();
+}
+
+IDisplayObject * DisplayObjManager::CollideCheckAllObjectFunc(IDisplayObject * myObj)
+{
+	// 바운싱 박스 충돌 검사!
+	// BSP를 이용한 공간분할로 충돌체크를 해야되지만
+	// 일단은 objManager의 객체들과 모두 충돌체크를 돌리도록 한다
+	for (auto p : m_AllObstacleList)
+	{
+		if (p == myObj)
+			continue;
+	
+		// Collision Detection Test!
+		int nRet = BoxBoxIntersectionTest(*(myObj->GetCBox()), *(p->GetCBox()));
+	
+		// 충돌!
+		// 다만 이방법은 가장 처음 충돌한 하나의 값만 충돌하므로
+		// 여러개를 한번에 충돌하는 방법을 고안해야한다
+		if (nRet == 1)
+		{
+			return p;
+		}
+	}
+	
+	return NULL;
+}
+
+IDisplayObject * DisplayObjManager::CollideCheckWithTagFunc(IDisplayObject * myObj, int tag, ...)
+{
+	// 가변인자를 이용하여 여러개의 Tag를 받는다
+	va_list argList;
+	va_start(argList, tag);
+
+	// 바운싱 박스 충돌 검사!
+	// BSP를 이용한 공간분할로 충돌체크를 해야되지만
+	// 일단은 objManager의 객체들과 모두 충돌체크를 돌리도록 한다
+	for (auto p : m_ObstacleList[va_arg(argList, int)])
+	{
+		if (p == myObj)
+			continue;
+
+		// Collision Detection Test!
+		int nRet = BoxBoxIntersectionTest(*(myObj->GetCBox()), *(p->GetCBox()));
+
+		// 충돌!
+		// 다만 이방법은 가장 처음 충돌한 하나의 값만 충돌하므로
+		// 여러개를 한번에 충돌하는 방법을 고안해야한다
+		if (nRet == 1)
+		{
+			return p;
+		}
+	}
+
+	va_end(argList);
+
+	return NULL;
+}
+
+
+vector<IDisplayObject *> DisplayObjManager::CollideCheckAllObject_ReturnVecFunc(IDisplayObject * myObj)
+{
+	vector<IDisplayObject *> vec;
+
+	// 바운싱 박스 충돌 검사!
+	// BSP를 이용한 공간분할로 충돌체크를 해야되지만
+	// 일단은 objManager의 객체들과 모두 충돌체크를 돌리도록 한다
+	for (auto p : m_AllObstacleList)
+	{
+		if (p == myObj)
+			continue;
+
+		// Collision Detection Test!
+		int nRet = BoxBoxIntersectionTest(*(myObj->GetCBox()), *(p->GetCBox()));
+
+		// 충돌!
+		// 다만 이방법은 가장 처음 충돌한 하나의 값만 충돌하므로
+		// 여러개를 한번에 충돌하는 방법을 고안해야한다
+		if (nRet == 1)
+		{
+			vec.push_back(p);
+		}
+	}
+
+	return vec;
+}
+
+vector<IDisplayObject *> DisplayObjManager::CollideCheckWithTag_ReturnVecFunc(IDisplayObject * myObj, int tag, ...)
+{
+	vector<IDisplayObject *> vec;
+
+	// 가변인자를 이용하여 여러개의 Tag를 받는다
+	va_list argList;
+	va_start(argList, tag);
+
+	// 바운싱 박스 충돌 검사!
+	// BSP를 이용한 공간분할로 충돌체크를 해야되지만
+	// 일단은 objManager의 객체들과 모두 충돌체크를 돌리도록 한다
+	for (auto p : m_ObstacleList[va_arg(argList, int)])
+	{
+		if (p == myObj)
+			continue;
+
+		// Collision Detection Test!
+		int nRet = BoxBoxIntersectionTest(*(myObj->GetCBox()), *(p->GetCBox()));
+
+		// 충돌!
+		// 다만 이방법은 가장 처음 충돌한 하나의 값만 충돌하므로
+		// 여러개를 한번에 충돌하는 방법을 고안해야한다
+		if (nRet == 1)
+		{
+			vec.push_back(p);
+		}
+	}
+
+	va_end(argList);
+
+	return vec;
 }
