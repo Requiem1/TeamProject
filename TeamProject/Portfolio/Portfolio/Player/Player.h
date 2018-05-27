@@ -3,6 +3,7 @@
 
 
 class Inventory;
+class ITEM;
 // class º®
 enum ITEMEQUIP
 {
@@ -33,6 +34,8 @@ private:
 	//Grid*                   TestGrid;
 	PlAYERINFO              m_INFO;
 	int                     m_EquipInfo;
+
+	vector<ITEM*>           m_vecBullet;
 
 	D3DXVECTOR3		m_DeltaPos;
 	D3DXVECTOR3		m_DeltaRot;
@@ -108,5 +111,7 @@ public:
 	{
 		return m_INFO;
 	}
+
+	void DiretcionDecide(OUT D3DXVECTOR3 * Direction);
 };
 

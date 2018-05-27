@@ -1,6 +1,8 @@
 #include "../stdafx.h"
 #include "Player.h"
 #include "Inventory.h"
+#include "../Manager/Item.h"
+#include "../Map/HeightMap.h"
 
 
 Player::Player() : m_INFO(PlAYERINFO(100, 100, 0, 0, 0))
@@ -15,6 +17,7 @@ Player::Player() : m_INFO(PlAYERINFO(100, 100, 0, 0, 0))
 	m_jumpPower = 1.0f;
 	m_gravity = 0.05f;
 	m_currGravity = 0.0f;
+	m_maxStepHeight = 2.0f;
 }
 
 
@@ -80,9 +83,11 @@ void Player::Update()
 	m_rot += m_DeltaRot * m_rotationSpeed;
 
 	D3DXMATRIXA16 matRotY;
-	D3DXMatrixRotationY(&matRotY, m_rot.y);
-	D3DXVec3TransformNormal(&m_forward,
-		&D3DXVECTOR3(0, 0, 1), &matRotY);
+	matRotY = g_pCamera->GetCameraRotY();
+	D3DXVec3TransformNormal(&m_forward, &D3DXVECTOR3(0, 0, 1), &matRotY);
+	D3DXVECTOR3 Right,Left;
+	D3DXVec3Cross(&Right, &m_forward, &g_pCamera->GetCameraUp());
+	Left = D3DXVECTOR3(-Right.x, 0, -Right.z);
 
 	D3DXVECTOR3 targetPos;
 
@@ -98,24 +103,18 @@ void Player::Update()
 
 		targetPos.y += m_jumpPower - m_currGravity;
 		m_currGravity += m_gravity;
-
-		/*
+		
 		if (g_pCurrentMap != NULL)
 		{
 			isIntersected = g_pCurrentMap->GetHeight(height, targetPos);
 		}
-		*/
-		
-
 		if (isIntersected == false)
 		{
-			/*
-			 if (g_pCurrentMap != NULL)
+			
+			if (g_pCurrentMap != NULL)
 			{
 				isIntersected = g_pCurrentMap->GetHeight(height, m_pos);
 			}
-			
-			*/
 			
 			m_pos.y = targetPos.y;
 		}
@@ -124,7 +123,7 @@ void Player::Update()
 			m_pos = targetPos;
 		}
 
-		/*
+		
 		
 		if (m_pos.y <= height && m_jumpPower < m_currGravity)
 		{
@@ -133,14 +132,16 @@ void Player::Update()
 			m_currGravity = 0;
 			m_currMoveSpeedRate = 1.0f;
 		}
-		*/
+		
 		//m_pos = targetPos;
 	}
 	else //m_IsJumping == false
 	{
-		targetPos = m_pos + m_forward * m_DeltaPos.z
-			* m_moveSpeed * m_currMoveSpeedRate;
-		/*
+		
+		
+		targetPos = m_pos + m_forward * m_DeltaPos.z* m_moveSpeed * m_currMoveSpeedRate;
+		
+		
 		if (g_pCurrentMap != NULL)
 		{
 			isIntersected = g_pCurrentMap->GetHeight(height, targetPos);
@@ -157,13 +158,45 @@ void Player::Update()
 		}
 		else
 		{
-		*/
-		
-	
 			m_pos = targetPos;
-		
 
+		}
 		//m_pos = targetPos;
+	}
+
+	if (GetKeyState('E') & 0x0001)
+	{
+		if (g_pINPUTMGR->ButtonDown(g_pINPUTMGR->LBUTTON))
+		{
+			for (int i = 0; i < 5; i++)
+			{
+				ITEM * item;
+				D3DXVECTOR3 * tempDirection;
+				tempDirection = new D3DXVECTOR3();
+				DiretcionDecide(tempDirection);
+				item = new ITEM();
+				item->Init();
+				item->SetClick(true);
+				item->SetBullet(tempDirection, &m_pos);
+				m_vecBullet.push_back(item);
+
+			}
+
+		}
+		
+	}
+	else
+	{
+		if (g_pINPUTMGR->ButtonPress(g_pINPUTMGR->LBUTTON))
+		{
+			ITEM * item;
+			item = new ITEM();
+			item->Init();
+			item->SetClick(true);
+			item->SetBullet(&m_forward, &m_pos);
+			m_vecBullet.push_back(item);
+		}
+
 	}
 
 	D3DXMATRIXA16 matT;
@@ -175,7 +208,9 @@ void Player::Update()
 		m_isMoving = true;
 	else
 		m_isMoving = false;
-	
+
+	for (int i = 0; i < m_vecBullet.size(); i++)
+		m_vecBullet[i]->Update();
 }
 
 void Player::Render()
@@ -188,6 +223,8 @@ void Player::Render()
 	g_pDevice->SetIndices(m_pIB);
 	g_pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0,
 		m_VBDesc.Size, 0, m_IBDesc.Size / 3);
+	for (int i = 0; i < m_vecBullet.size(); i++)
+		m_vecBullet[i]->Render();
 
 }
 
@@ -234,4 +271,25 @@ void Player::Equip()
 		m_EquipInfo |= ITEMEQUIP::REG;
 	else
 		m_EquipInfo ^= ITEMEQUIP::REG;
+}
+
+void Player::DiretcionDecide(OUT D3DXVECTOR3 * Direction)
+{
+	D3DXVECTOR3 Change = m_forward;
+	D3DXMATRIXA16 XRot, YRot, Mat;
+
+	float XRadian, YRadian;
+	XRadian = GetRandomFloat(-0.3, 0.3);
+	YRadian = GetRandomFloat(-0.3, 0.3);
+
+
+	D3DXMatrixRotationX(&XRot, XRadian);
+	D3DXMatrixRotationY(&YRot, YRadian);
+
+	Mat = XRot + YRot;
+
+	D3DXVec3TransformNormal(Direction, &Change, &Mat);
+
+
+
 }
