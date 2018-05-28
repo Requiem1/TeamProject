@@ -57,6 +57,12 @@
     <Filter Include="Object\Enemy">
       <UniqueIdentifier>{0543ca56-73c9-4670-859c-77904b9a4f78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\InteractObj">
+      <UniqueIdentifier>{aa2f14f1-8aab-476d-95b4-bb5d60d52d77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Loader">
+      <UniqueIdentifier>{6f3767c6-594d-4d83-ba2c-f81bde8ddc9b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -134,14 +140,71 @@
     <ClInclude Include="Manager\DisplayObjManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Manager\TextureManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Manager\InputManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="Manager\SceneManager.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle\CollisionDetection.hpp">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\HeightMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\IMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene\SceneHeightMap.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\MapManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\SkyBox.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle\CheckpointSwitch.h">
+      <Filter>Object\InteractObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle\MapObstacle.h">
+      <Filter>Object\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\AllocateHierarchy.h">
+      <Filter>Object\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\ObjLoader.h">
+      <Filter>Object\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\SkinnedMesh.h">
+      <Filter>Object\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Debug.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\Keyboard.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\Mouse.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\TextureManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Loader\TimeManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\soundManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\GameUI.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI\UIText.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Manager\Item.h">
+      <Filter>Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -211,14 +274,68 @@
     <ClCompile Include="Manager\DisplayObjManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Manager\TextureManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Manager\InputManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
     <ClCompile Include="Manager\SceneManager.cpp">
       <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle\CollisionDetection.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\HeightMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene\SceneHeightMap.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\MapManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\SkyBox.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle\CheckpointSwitch.cpp">
+      <Filter>Object\InteractObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle\MapObstacle.cpp">
+      <Filter>Object\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\AllocateHierarchy.cpp">
+      <Filter>Object\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\ObjLoader.cpp">
+      <Filter>Object\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\SkinnedMesh.cpp">
+      <Filter>Object\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Debug.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\Keyboard.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\Mouse.cpp">
+      <Filter>Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\TextureManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Loader\TimeManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\soundManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\GameUI.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI\UIText.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Manager\Item.cpp">
+      <Filter>Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

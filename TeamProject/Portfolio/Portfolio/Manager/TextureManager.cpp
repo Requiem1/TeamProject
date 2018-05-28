@@ -9,10 +9,6 @@ TextureManager::TextureManager()
 
 TextureManager::~TextureManager()
 {
-	for (auto it : m_mapTexture)
-	{
-		SAFE_RELEASE(it.second);
-	}
 }
 
 LPDIRECT3DTEXTURE9 TextureManager::GetTexture(char * fullPath)
@@ -34,20 +30,11 @@ LPDIRECT3DTEXTURE9 TextureManager::GetTexture(string fullPath)
 	return m_mapTexture[fullPath];
 }
 
-LPDIRECT3DTEXTURE9 TextureManager::GetTextureEx(string fullPath)
+LPDIRECT3DTEXTURE9 TextureManager::GetTexture(CString fullPath)
 {
-	if (fullPath == "") return NULL;
-
-	if (m_mapTexture.find(fullPath) == m_mapTexture.end())
-	{
-		D3DXCreateTextureFromFileExA(
-			g_pDevice, fullPath.c_str(),
-			0, 0, 0, 0, D3DFMT_UNKNOWN, D3DPOOL_DEFAULT, 
-			D3DX_DEFAULT, D3DX_DEFAULT, D3DCOLOR(0), NULL,
-			NULL, &m_mapTexture[fullPath]);
-		
-	}
-	return m_mapTexture[fullPath];
+	CT2CA pszConvertedAnsiString(fullPath);
+	std::string _str(pszConvertedAnsiString);
+	return GetTexture(_str);
 }
 
 void TextureManager::Destroy()

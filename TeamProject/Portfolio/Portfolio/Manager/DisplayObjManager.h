@@ -4,7 +4,7 @@
 
 class DisplayObjManager
 {
-	SINGLETON(DisplayObjManager);
+	SINGLETON(DisplayObjManager)
 
 private:
 	set<IDisplayObject*> m_AllObstacleList;				// 모든 오브젝트 확인
@@ -26,7 +26,7 @@ public:
 
 	// 충돌 검사 함수!
 	IDisplayObject * CollideCheckAllObjectFunc(IDisplayObject * myObj);
-	IDisplayObject * CollideCheckWithTagFunc(IDisplayObject * myObj, int tag, ...);
+	IDisplayObject * CollideCheckWithTagFunc(IDisplayObject * myObj, int tagNum, ...);
 
 	// 충돌 검사 -> 충돌하고 있는 모든 개체들을 vector에 넣어 
 	vector<IDisplayObject *> CollideCheckAllObject_ReturnVecFunc(IDisplayObject * myObj);

@@ -40,8 +40,8 @@ void ITEM::Update()
 		g_DisplayObjMgr->RemoveObjectWithTag(this, BULLET_TAG);
 
 		// 안보이는 위치의 범위로 옮겨버린다
-		CollideEnemy->SetPosition(&D3DXVECTOR3(100000, 10000, 10000));
-		this->SetPosition(&D3DXVECTOR3(100000, 10000, 10000));
+		CollideEnemy->SetPosition(&D3DXVECTOR3(10000, 10000, 10000));
+		this->SetPosition(&D3DXVECTOR3(10000, 10000, 10000));
 	}
 
 

@@ -11,6 +11,8 @@ private:
 public:
 	LPDIRECT3DTEXTURE9 GetTexture(char* fullPath);
 	LPDIRECT3DTEXTURE9 GetTexture(string fullPath);
-	LPDIRECT3DTEXTURE9 GetTextureEx(string fullPath);
+	LPDIRECT3DTEXTURE9 GetTexture(CString fullPath);
+
 	void Destroy();
 };
+

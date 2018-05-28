@@ -25,6 +25,7 @@ void Application::Init()
 void Application::Destroy()
 {
 	g_SceneMgr->Destroy();
+	g_DisplayObjMgr->Destroy();
 	g_pDeviceManager->Destroy();
 	g_pPlayerMGR->Destory();
 }
@@ -34,6 +35,7 @@ void Application::Update()
 	g_pCamera->Update();
 	g_pINPUTMGR->Update();
 	g_pPlayerMGR->Update();
+
 	g_SceneMgr->Update();
 }
 

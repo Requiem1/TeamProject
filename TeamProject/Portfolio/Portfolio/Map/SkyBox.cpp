@@ -25,15 +25,14 @@ void SkyBox::_Destroy()
 {
 	if (m_pVB != NULL)
 	{
-		m_pVB->Release();
+		SAFE_RELEASE(m_pVB);
 	}
 
-	// 이거 텍스쳐매니저에서 함
-	//for (int i = 0; i < MAX_SKY_TEX; i++)
-	//{
-	//	if (m_pTex[i] != NULL)
-	//		m_pTex[i]->Release();
-	//}
+	for (int i = 0; i < MAX_SKY_TEX; i++)
+	{
+		if (m_pTex[i] != NULL)
+			SAFE_RELEASE(m_pTex[i]);
+	}
 }
 
 void SkyBox::_LoadTextures(const char* filePath, const char* fileName)

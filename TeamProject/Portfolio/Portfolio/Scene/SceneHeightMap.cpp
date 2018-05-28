@@ -62,7 +62,7 @@ void SceneHeightMap::Init()
 	//AddSimpleDisplayObj(S_Switch);
 
 	D3DMATERIAL9 mtl = DXUtil::WHITE_MTRL;
-	S_HeightMap->SetMtlTex(mtl, g_pTextureManager->GetTexture("Resource/Map/desert.jpg"));
+	S_HeightMap->SetMtlTex(mtl, g_pTextureManager->GetTexture(L"Resource/Map/desert.jpg"));
 
 	g_pMapManager->AddMap("HeightMap", S_HeightMap);
 	g_pMapManager->SetCurrentMap("HeightMap");

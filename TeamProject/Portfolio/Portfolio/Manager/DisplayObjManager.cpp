@@ -65,16 +65,16 @@ IDisplayObject * DisplayObjManager::CollideCheckAllObjectFunc(IDisplayObject * m
 	return NULL;
 }
 
-IDisplayObject * DisplayObjManager::CollideCheckWithTagFunc(IDisplayObject * myObj, int tag, ...)
+IDisplayObject * DisplayObjManager::CollideCheckWithTagFunc(IDisplayObject * myObj, int tagNum, ...)
 {
 	// 가변인자를 이용하여 여러개의 Tag를 받는다
 	va_list argList;
-	va_start(argList, tag);
+	va_start(argList, tagNum);
 
 	// 바운싱 박스 충돌 검사!
 	// BSP를 이용한 공간분할로 충돌체크를 해야되지만
 	// 일단은 objManager의 객체들과 모두 충돌체크를 돌리도록 한다
-	for (auto p : m_ObstacleList[va_arg(argList, int)])
+	for (auto p : m_ObstacleList[va_arg(argList, WORD)])
 	{
 		if (p == myObj)
 			continue;
@@ -87,6 +87,7 @@ IDisplayObject * DisplayObjManager::CollideCheckWithTagFunc(IDisplayObject * myO
 		// 여러개를 한번에 충돌하는 방법을 고안해야한다
 		if (nRet == 1)
 		{
+			va_end(argList);
 			return p;
 		}
 	}
