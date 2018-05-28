@@ -25,12 +25,23 @@ Player::~Player()
 {
 	SAFE_RELEASE(m_pVB);
 	SAFE_RELEASE(m_pIB);
-	SAFE_DELETE(m_pInventory);
+	//SAFE_DELETE(m_pInventory);
 	//SAFE_RELEASE(TestGrid);
+
+	for(auto p : m_vecBullet)
+		SAFE_RELEASE(p);
 }
 
 void Player::Init()
 {
+	// 원래 BGM은 여기 넣으면 안되는데 귀찬아서 걍 넣음
+	g_SoundMgr->AddSound(L"BGM", "Resource/Sound/BGM/ArgentCombat.mp3", true, true);
+
+	g_SoundMgr->AddSound(L"Rifle", "Resource/Sound/SE/ak74-fire.wav", false, false);
+	g_SoundMgr->AddSound(L"Shotgun", "Resource/Sound/SE/spas12-fire.wav", false, false);
+	g_SoundMgr->AddSound(L"GunChange", "Resource/Sound/SE/spas12-reload.wav", false, false);
+
+	g_SoundMgr->Play(L"BGM", true);
 
 	m_EquipInfo = 0;
 	m_pos = D3DXVECTOR3(0, 1, 0);
@@ -194,6 +205,8 @@ void Player::Update()
 		}
 		//m_pos = targetPos;
 	}
+	if (GetKeyState('E') & 0x8000)
+		g_SoundMgr->Play(L"GunChange", false);
 
 	if (GetKeyState('E') & 0x0001)
 	{
@@ -210,8 +223,9 @@ void Player::Update()
 				item->SetClick(true);
 				item->SetBullet(tempDirection, &m_pos);
 				m_vecBullet.push_back(item);
-
 			}
+
+			g_SoundMgr->Play(L"Shotgun", false);
 		}
 		
 	}
@@ -225,6 +239,7 @@ void Player::Update()
 			item->SetClick(true);
 			item->SetBullet(&m_forward, &m_pos);
 			m_vecBullet.push_back(item);
+			g_SoundMgr->Play(L"Rifle", false);
 		}
 
 	}
