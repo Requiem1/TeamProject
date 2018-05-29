@@ -2,11 +2,11 @@
 #include "Server.h"
 
 
-Server::Server()
+CServer::CServer()
 {
 }
 
-
-Server::~Server()
+CServer::~CServer()
 {
 }
+

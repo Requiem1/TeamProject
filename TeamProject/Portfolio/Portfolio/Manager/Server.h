@@ -1,10 +1,10 @@
 #pragma once
-class Server
+class CServer
 {
 private:
 
 public:
-	Server();
-	~Server();
+	CServer();
+	~CServer();
 };
 
