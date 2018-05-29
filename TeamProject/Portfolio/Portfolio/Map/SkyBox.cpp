@@ -139,6 +139,8 @@ void SkyBox::Render()
 	g_pDevice->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_CLAMP);
 	g_pDevice->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);
 
+	g_pDevice->SetRenderState(D3DRS_LIGHTING, false);
+
 	g_pDevice->SetFVF(D3DFVF_SKYVERTEX);
 	g_pDevice->SetStreamSource(0, m_pVB, 0, sizeof(SkyVertex));
 
@@ -151,4 +153,6 @@ void SkyBox::Render()
 		g_pDevice->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_WRAP);
 	}
 
+	g_pDevice->SetTexture(0, NULL);
+	//g_pDevice->SetRenderState(D3DRS_LIGHTING, true);
 }
