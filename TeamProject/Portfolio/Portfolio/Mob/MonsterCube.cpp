@@ -16,12 +16,11 @@ MonsterCube::~MonsterCube()
 {
 	SAFE_RELEASE(m_pVB);
 	SAFE_RELEASE(m_pIB);
+	vecPos.clear();
 }
 
 void MonsterCube::Init()
 {
-	vector<D3DXVECTOR3> vecPos;
-
 	for (size_t i = 0; i < CUBE_VERTEX_SIZE; i++)
 	{
 		vecPos.push_back(g_aCubeVertex[i]);
@@ -30,7 +29,7 @@ void MonsterCube::Init()
 	// 상자의 한 변은 2 * 2
 	// radius는 1.5 정도로 하자
 
-	SetVertex(m_vecVertex, m_vecIndex, vecPos,white);
+	SetVertex(m_vecVertex, m_vecIndex, vecPos, white);
 	SetBuffer(m_pVB, m_pIB, m_vecVertex, m_vecIndex);
 
 	m_pVB->GetDesc(&m_VBDesc);
@@ -67,6 +66,8 @@ void MonsterCube::Update()
 			}
 			else
 			{
+				SetVertex(m_vecVertex, m_vecIndex, vecPos, red);
+				SetBuffer(m_pVB, m_pIB, m_vecVertex, m_vecIndex);
 				m_state = STATE_ATTACK;
 			}
 			break;
@@ -76,9 +77,12 @@ void MonsterCube::Update()
 			if (D3DXVec3Length(&(m_Destination - m_pos)) <= 3.0f)
 			{
 				heightcheck = g_pCurrentMap->GetHeight(m_pos.y, m_pos);
+
 			}
 			else
 			{
+				SetVertex(m_vecVertex, m_vecIndex, vecPos, white);
+				SetBuffer(m_pVB, m_pIB, m_vecVertex, m_vecIndex);
 				m_state = STATE_MOVE;
 			}
 		}

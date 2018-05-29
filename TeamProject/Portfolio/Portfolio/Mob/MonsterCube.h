@@ -22,6 +22,8 @@ private:
 	vector<Player*>			m_pPlayer;
 	int						m_state;
 
+	vector<D3DXVECTOR3> vecPos;
+
 	D3DCOLOR red = D3DCOLOR_XRGB(255, 0, 0);
 	D3DCOLOR green = D3DCOLOR_XRGB(0, 255, 0);
 	D3DCOLOR blue = D3DCOLOR_XRGB(0, 0, 255);
