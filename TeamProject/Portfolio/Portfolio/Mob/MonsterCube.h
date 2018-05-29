@@ -39,9 +39,12 @@ public:
 	void Render();
 
 
+	void CreateBuffer(LPDIRECT3DVERTEXBUFFER9 & pVb, LPDIRECT3DINDEXBUFFER9 & pIb,
+		vector<VERTEX_PC>& vecVertex, vector<WORD>& vecIndex);
 
 	void SetVertex(vector<VERTEX_PC> &vecVertexOut,
 		vector<WORD> &vecIndexOut, vector<D3DXVECTOR3> vecPos, D3DCOLOR color);
+
 	void SetBuffer(LPDIRECT3DVERTEXBUFFER9 &pVb,
 		LPDIRECT3DINDEXBUFFER9 &pIb,
 		vector<VERTEX_PC> &vecVertex, vector<WORD> &vecIndex);

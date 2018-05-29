@@ -30,7 +30,7 @@ void MonsterCube::Init()
 	// radius는 1.5 정도로 하자
 
 	SetVertex(m_vecVertex, m_vecIndex, vecPos, white);
-	SetBuffer(m_pVB, m_pIB, m_vecVertex, m_vecIndex);
+	CreateBuffer(m_pVB, m_pIB, m_vecVertex, m_vecIndex);
 
 	m_pVB->GetDesc(&m_VBDesc);
 	m_pIB->GetDesc(&m_IBDesc);
@@ -123,7 +123,7 @@ void MonsterCube::SetVertex(vector<VERTEX_PC>& vecVertexOut, vector<WORD>& vecIn
 	}
 }
 
-void MonsterCube::SetBuffer(LPDIRECT3DVERTEXBUFFER9 & pVb, LPDIRECT3DINDEXBUFFER9 & pIb, vector<VERTEX_PC>& vecVertex, vector<WORD>& vecIndex)
+void MonsterCube::CreateBuffer(LPDIRECT3DVERTEXBUFFER9 & pVb, LPDIRECT3DINDEXBUFFER9 & pIb, vector<VERTEX_PC>& vecVertex, vector<WORD>& vecIndex)
 {
 	g_pDevice->CreateVertexBuffer(vecVertex.size() * sizeof(VERTEX_PC),
 		0, VERTEX_PC::FVF, D3DPOOL_MANAGED, &pVb, NULL);
@@ -136,6 +136,21 @@ void MonsterCube::SetBuffer(LPDIRECT3DVERTEXBUFFER9 & pVb, LPDIRECT3DINDEXBUFFER
 
 	g_pDevice->CreateIndexBuffer(vecIndex.size() * sizeof(WORD),
 		NULL, D3DFMT_INDEX16, D3DPOOL_MANAGED, &pIb, NULL);
+
+	WORD* pIndex;
+	pIb->Lock(0, 0, (LPVOID*)&pIndex, 0);
+	memcpy(pIndex, &vecIndex[0], vecIndex.size() * sizeof(WORD));
+	pIb->Unlock();
+	vecIndex.clear();
+}
+
+void MonsterCube::SetBuffer(LPDIRECT3DVERTEXBUFFER9 & pVb, LPDIRECT3DINDEXBUFFER9 & pIb, vector<VERTEX_PC>& vecVertex, vector<WORD>& vecIndex)
+{
+	VERTEX_PC* pVertex;
+	pVb->Lock(0, 0, (LPVOID*)&pVertex, 0);
+	memcpy(pVertex, &vecVertex[0], vecVertex.size() * sizeof(VERTEX_PC));
+	pVb->Unlock();
+	vecVertex.clear();
 
 	WORD* pIndex;
 	pIb->Lock(0, 0, (LPVOID*)&pIndex, 0);
