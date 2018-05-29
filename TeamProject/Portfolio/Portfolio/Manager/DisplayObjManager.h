@@ -26,9 +26,12 @@ public:
 
 	// 충돌 검사 함수!
 	IDisplayObject * CollideCheckAllObjectFunc(IDisplayObject * myObj);
-	IDisplayObject * CollideCheckWithTagFunc(IDisplayObject * myObj, int tagNum, ...);
+	IDisplayObject * CollideCheckWithTagFunc(IDisplayObject * myObj, int tagNum, ...);	
+	// ㄴWithTag 함수 - 여러개의 태그를 가변적으로 넣을 수 있다
+	// CollideCheckWithTagFunc(오브젝트, 태그의 갯수, 태그들)
+	// ex) CollideCheckWithTagFunc(obj, 3, ENEMY_TAG, BULLET_TAG, NORMAL_OBSTACLE_TAG)
 
-	// 충돌 검사 -> 충돌하고 있는 모든 개체들을 vector에 넣어 
+	// 충돌 검사 -> 충돌하고 있는 모든 개체들을 vector에 넣어
 	vector<IDisplayObject *> CollideCheckAllObject_ReturnVecFunc(IDisplayObject * myObj);
 	vector<IDisplayObject *> CollideCheckWithTag_ReturnVecFunc(IDisplayObject * myObj, int tag, ...);
 

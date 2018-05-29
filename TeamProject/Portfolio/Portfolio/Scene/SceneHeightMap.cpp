@@ -19,6 +19,8 @@ SceneHeightMap::SceneHeightMap()
 
 SceneHeightMap::~SceneHeightMap()
 {
+	SAFE_RELEASE(S_HeightMap);
+	SAFE_RELEASE(S_SkyBox);
 	OnDestructIScene();
 }
 
@@ -31,11 +33,17 @@ void SceneHeightMap::Init()
 
 	// 맵
 	S_HeightMap = new HeightMap();
-	AddSimpleDisplayObj(S_HeightMap);
 
 	S_HeightMap->Setdimension(257);
 	S_HeightMap->Load("Resource/Map/HeightMap.raw", &matS);
 	S_HeightMap->Init();
+
+	D3DMATERIAL9 mtl = DXUtil::WHITE_MTRL;
+	S_HeightMap->SetMtlTex(mtl, g_pTextureManager->GetTexture(L"Resource/Map/desert.jpg"));
+
+	g_pMapManager->AddMap("HeightMap", S_HeightMap);
+	g_pMapManager->SetCurrentMap("HeightMap");
+	//AddSimpleDisplayObj(S_HeightMap);
 
 
 	// 스카이박스
@@ -47,6 +55,7 @@ void SceneHeightMap::Init()
 		MonsterCube * pMonsterCube = new MonsterCube;
 		pMonsterCube->Init();
 		m_pMonsterCubeList.push_back(pMonsterCube);
+		AddSimpleDisplayObj(pMonsterCube);
 	}
 	//AddSimpleDisplayObj(S_SkyBox);
 
@@ -61,12 +70,6 @@ void SceneHeightMap::Init()
 	//S_Switch->Init();
 	//AddSimpleDisplayObj(S_Switch);
 
-	D3DMATERIAL9 mtl = DXUtil::WHITE_MTRL;
-	S_HeightMap->SetMtlTex(mtl, g_pTextureManager->GetTexture(L"Resource/Map/desert.jpg"));
-
-	g_pMapManager->AddMap("HeightMap", S_HeightMap);
-	g_pMapManager->SetCurrentMap("HeightMap");
-
 	D3DXVECTOR3 dir(1.0f, -1.0f, 1.0f);
 	D3DXVec3Normalize(&dir, &dir);		// 광원의 방향을 단위벡터로 만듬
 	D3DLIGHT9 light = DXUtil::InitDirectional(&dir, &WHITE);  // 광원 종류와 방향/색 지정
@@ -78,25 +81,17 @@ void SceneHeightMap::Init()
 
 void SceneHeightMap::Update()
 {
-	for (auto p : m_pMonsterCubeList)
-	{
-		p->Update();
-	}
-
 	OnUpdateIScene();
 }
 
 void SceneHeightMap::Render()
 {
-	for (auto p : m_pMonsterCubeList)
-	{
-		p->Render();
-	}
-	S_SkyBox->Render();
 	OnRenderIScene();
+	SAFE_RENDER(S_HeightMap);
+	SAFE_RENDER(S_SkyBox);
 }
 
 void SceneHeightMap::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-	SAFE_WNDPROC(S_HeightMap);
+	//SAFE_WNDPROC(S_HeightMap);
 }

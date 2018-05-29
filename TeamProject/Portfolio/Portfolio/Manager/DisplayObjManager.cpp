@@ -10,6 +10,7 @@ DisplayObjManager::DisplayObjManager()
 
 DisplayObjManager::~DisplayObjManager()
 {
+	Destroy();
 }
 
 void DisplayObjManager::AddObject(IDisplayObject * Obj)
@@ -38,6 +39,7 @@ void DisplayObjManager::RemoveObjectWithTag(IDisplayObject * Obj, WORD tag)
 void DisplayObjManager::Destroy()
 {
 	m_AllObstacleList.clear();
+	m_ObstacleList.clear();
 }
 
 IDisplayObject * DisplayObjManager::CollideCheckAllObjectFunc(IDisplayObject * myObj)
@@ -53,9 +55,7 @@ IDisplayObject * DisplayObjManager::CollideCheckAllObjectFunc(IDisplayObject * m
 		// Collision Detection Test!
 		int nRet = BoxBoxIntersectionTest(*(myObj->GetCBox()), *(p->GetCBox()));
 	
-		// 충돌!
-		// 다만 이방법은 가장 처음 충돌한 하나의 값만 충돌하므로
-		// 여러개를 한번에 충돌하는 방법을 고안해야한다
+		// 가장 처음 충돌한 하나의 값만 반환한다
 		if (nRet == 1)
 		{
 			return p;
@@ -82,9 +82,7 @@ IDisplayObject * DisplayObjManager::CollideCheckWithTagFunc(IDisplayObject * myO
 		// Collision Detection Test!
 		int nRet = BoxBoxIntersectionTest(*(myObj->GetCBox()), *(p->GetCBox()));
 
-		// 충돌!
-		// 다만 이방법은 가장 처음 충돌한 하나의 값만 충돌하므로
-		// 여러개를 한번에 충돌하는 방법을 고안해야한다
+		// 가장 처음 충돌한 하나의 값만 반환한다
 		if (nRet == 1)
 		{
 			va_end(argList);
@@ -113,15 +111,14 @@ vector<IDisplayObject *> DisplayObjManager::CollideCheckAllObject_ReturnVecFunc(
 		// Collision Detection Test!
 		int nRet = BoxBoxIntersectionTest(*(myObj->GetCBox()), *(p->GetCBox()));
 
-		// 충돌!
-		// 다만 이방법은 가장 처음 충돌한 하나의 값만 충돌하므로
-		// 여러개를 한번에 충돌하는 방법을 고안해야한다
+		// 충돌한 객체들을 vecter에 삽입한다
 		if (nRet == 1)
 		{
 			vec.push_back(p);
 		}
 	}
 
+	// 벡터를 반환한다
 	return vec;
 }
 
@@ -144,9 +141,7 @@ vector<IDisplayObject *> DisplayObjManager::CollideCheckWithTag_ReturnVecFunc(ID
 		// Collision Detection Test!
 		int nRet = BoxBoxIntersectionTest(*(myObj->GetCBox()), *(p->GetCBox()));
 
-		// 충돌!
-		// 다만 이방법은 가장 처음 충돌한 하나의 값만 충돌하므로
-		// 여러개를 한번에 충돌하는 방법을 고안해야한다
+		// 충돌한 객체들을 vecter에 삽입한다
 		if (nRet == 1)
 		{
 			vec.push_back(p);
@@ -155,5 +150,6 @@ vector<IDisplayObject *> DisplayObjManager::CollideCheckWithTag_ReturnVecFunc(ID
 
 	va_end(argList);
 
+	// 벡터를 반환한다
 	return vec;
 }

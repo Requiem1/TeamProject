@@ -24,10 +24,11 @@ void Application::Init()
 
 void Application::Destroy()
 {
+	g_pTextureManager->Destroy();
 	g_SceneMgr->Destroy();
+	g_pPlayerMGR->Destory();
 	g_DisplayObjMgr->Destroy();
 	g_pDeviceManager->Destroy();
-	g_pPlayerMGR->Destory();
 }
 
 void Application::Update()

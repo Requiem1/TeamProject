@@ -17,8 +17,8 @@ private:
 	Player * S_Player;
 	SkyBox * S_SkyBox;
 
-	vector<MapObstacle*> S_vecObstacle;
-	CheckpointSwitch* S_Switch; 
+	//vector<MapObstacle*> S_vecObstacle;
+	//CheckpointSwitch* S_Switch; 
 	vector<MonsterCube*> m_pMonsterCubeList;
 
 public:

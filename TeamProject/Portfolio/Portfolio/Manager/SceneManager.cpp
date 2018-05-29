@@ -10,7 +10,7 @@ SceneManager::SceneManager()
 
 SceneManager::~SceneManager()
 {
-
+	Destroy();
 }
 
 void SceneManager::Init()
@@ -18,15 +18,14 @@ void SceneManager::Init()
 	m_vecScene.push_back(new IntroScene());
 	m_vecScene.push_back(new SceneHeightMap());
 
+	//SetCurrentScene(SCENE_INTRO);
 	SetCurrentScene(SCENE_HEIGHTMAP);
 }
 
 void SceneManager::Destroy()
 {
-	for (auto p : m_vecScene)
-	{
-		SAFE_RELEASE(p);
-	}
+	for(int i = 0; i < m_vecScene.size(); i++)
+		SAFE_RELEASE(m_vecScene[i]);
 }
 
 void SceneManager::Update()
